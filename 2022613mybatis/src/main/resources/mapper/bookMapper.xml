@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--多表关联映射（书籍表与书籍类型表）-->
+<mapper namespace="com.blb.mapper.BookMapperDao">
+
+    <!--一对一关系（查询所有书籍及书籍类型）-->
+    <!--方式一-->
+<!--    <resultMap id="a" type="com.blb.entity.Book">
+        <id property="id" column="id"></id>
+        <result property="bookName" column="book_name"></result>
+        <result property="bookTypeId" column="book_type_id"></result>
+
+        <association property="bookType" javaType="com.blb.entity.BookType">
+            <id property="id" column="book_type_id"></id>
+            <result property="bookType" column="book_type"></result>
+        </association>
+
+    </resultMap>
+
+    <select id="list" resultMap="a">
+        select * from b_book b
+        left join b_type t on b.book_type_id = t.id
+    </select>-->
+
+    <!--一对一关系（查询所有书籍及书籍类型）-->
+    <!--方式二-->
+    <resultMap id="a" type="com.blb.entity.Book">
+        <id property="id" column="id"></id>
+        <result property="bookName" column="book_name"></result>
+        <result property="bookTypeId" column="book_type_id"></result>
+
+        <collection property="bookType" ofType="com.blb.entity.BookType" select="get" column="book_type_id">
+
+        </collection>
+    </resultMap>
+
+    <select id="list" resultMap="a">
+        select * from b_book
+    </select>
+
+    <select id="get" resultType="com.blb.entity.BookType">
+        select * from b_type where id = #{id}
+    </select>
+
+
+    <!--一对多关系(查询书籍类型)-->
+    <!--方式一-->
+    <resultMap id="b" type="com.blb.entity.BookType">
+        <id property="id" column="id"></id>
+        <result property="bookType" column="book_type"></result>
+
+        <collection property="books" ofType="com.blb.entity.Book">
+            <id property="id" column="bid"></id>
+            <result property="bookName" column="book_name"></result>
+            <result property="bookTypeId" column="book_type_id"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getBookByTypeId" resultMap="b">
+        select *,bb.book_type_id bid from b_type bt
+        left join b_book bb on bt.id = bb.book_type_id
+    </select>
+
+    <!--一对多关系(查询书籍类型)-->
+    <!--方式二-->
+    <!--<resultMap id="b" type="com.blb.entity.BookType">
+        <id property="id" column="id"></id>
+        <result property="bookType" column="book_type"></result>
+        <collection property="books" ofType="com.blb.entity.Book" select="getBook" column="id">
+
+        </collection>
+    </resultMap>
+
+    <select id="getBookByTypeId" resultMap="b">
+        select * from b_type
+    </select>
+
+    <select id="getBook" resultType="com.blb.entity.Book">
+        select * from b_book where book_type_id = #{id}
+    </select>
+-->
+
+</mapper>

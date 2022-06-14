@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--单表
+namespace为dao层接口全路径-->
+<mapper namespace="com.blb.mapper.MapperDao">
+    <sql id="aaa">
+        select * from t_user
+    </sql>
+    <!--id为dao层接口的方法名,resultType为实体类全路径-->
+    <select id="list" resultType="com.blb.entity.User">
+        <include refid="aaa"></include>
+    </select>
+
+    <select id="get" resultType="com.blb.entity.User">
+        <include refid="aaa"></include>
+        <where>
+            <if test="name != null">
+                name like "%"#{name}"%"
+            </if>
+            <if test="pwd != null">
+                and pwd = #{pwd}
+            </if>
+        </where>
+    </select>
+
+    <select id="update1" >
+        update t_user
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="pwd != null">pwd = #{pwd}</if>
+        </set>
+        where id=#{id}
+    </select>
+
+    <insert id="addList">
+        insert into t_user(name,pwd) values
+            <foreach item="u" collection="list" separator=",">
+                (#{u.name},#{u.pwd})
+            </foreach>
+
+    </insert>
+</mapper>
+
