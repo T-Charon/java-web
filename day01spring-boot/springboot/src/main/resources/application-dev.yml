@@ -1,0 +1,19 @@
+#配置文件
+# person:
+#   name: 小猪
+#   age: 20
+#   address: 南昌
+
+#  personprop:
+#    name: 开发环境
+#    age: 23
+#    address:
+#      provice: 河北
+#      city: 唐山
+#      street: 梨园
+#    hobbies:
+#      - 睡觉
+#      - 吃饭
+#      - 打豆豆
+
+
