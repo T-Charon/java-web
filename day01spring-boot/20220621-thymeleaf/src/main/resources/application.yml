@@ -1,0 +1,18 @@
+
+#mybatis配置
+#  #配置dao层的映射文件路径（注解跟xml形式都可以通用）
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+
+#datasource配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/eshop?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+  main:
+    allow-circular-references: true
+

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/20220621-thymeleaf/20220621-thymeleaf.iml" filepath="$PROJECT_DIR$/20220621-thymeleaf/20220621-thymeleaf.iml" />
       <module fileurl="file://$PROJECT_DIR$/day01spring-boot.iml" filepath="$PROJECT_DIR$/day01spring-boot.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot/springboot.iml" filepath="$PROJECT_DIR$/springboot/springboot.iml" />
     </modules>

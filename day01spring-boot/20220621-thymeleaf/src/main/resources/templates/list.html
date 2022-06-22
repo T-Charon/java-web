@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>商品首页</title>
+</head>
+<script src="js/jquery.min.js"></script>
+<!-- 引入 layui.css -->
+<link href="//unpkg.com/layui@2.6.11/dist/css/layui.css" rel="stylesheet">
+<!-- 引入 layui.js -->
+<script src="//unpkg.com/layui@2.6.11/dist/layui.js"></script>
+<style>
+    img{
+        height: 60px;
+    }
+</style>
+<body>
+<script>
+    $(function (){
+        $(".delete").click(function () {
+            var id = $(this).parent().parent().children("td:eq(0)").text();
+            console.log(id)
+            $.ajax({
+                type:"delete",
+                url:"/delete/de",
+                data:{id:id},
+                success:function (e) {
+                    if(e == "ok"){
+                        console.log("ok")
+                        layer.msg('删除成功！',{icon:1 ,time:2000});
+                        setTimeout("window.location.replace('/index')",2000)
+                    }
+                }
+            })
+        })
+    })
+</script>
+<div style="margin-left: 50px ;margin-top: 20px" >
+    <a href="addpage">添加商品</a><br>
+    <br>
+    <table border="1px" cellpadding="0" cellspacing="0">
+        <tr>
+            <th width="20%">商品编号</th>
+            <th >商品名称</th>
+            <th >商品图片</th>
+            <th >商品价格</th>
+<!--            <th >商品类型</th>-->
+<!--            <th >商品描述</th>-->
+            <th >创建时间</th>
+<!--            <th >商品品牌</th>-->
+            <th colspan="2">操作</th>
+        </tr>
+        <div th:each="p : ${list} ">
+            <tr >
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.productName}"></td>
+                <td  >
+                    <img th:src="@{'/image/upload/'+ ${p.productImage}}"/>
+
+                </td>
+                <td th:text="${p.price}"></td>
+<!--                <td th:text="${p.productType}"></td>-->
+<!--                <td  >-->
+<!--                    <img th:src="@{/image/upload/{productDesc}(productDesc=${p.productDesc})}"/>-->
+<!--                </td>-->
+                <td th:text="${p.createTime}"></td>
+<!--                <td th:text="${p.productBrand}"></td>-->
+
+                <td><a th:href="@{update/{id}(id=${p.id})}">修改</a></td>
+                <td><a href="#" class="delete">删除</a></td>
+<!--                <td><a th:href="@{delete/{id}(id=${p.id})}">删除</a></td>-->
+            </tr>
+        </div>
+
+    </table>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>更新商品</title>
+    <script src="/js/jquery.min.js"></script>
+    <!-- 引入 layui.css -->
+    <link href="//unpkg.com/layui@2.6.11/dist/css/layui.css" rel="stylesheet">
+    <!-- 引入 layui.js -->
+    <script src="//unpkg.com/layui@2.6.11/dist/layui.js"></script>
+</head>
+
+<body>
+<script>
+    $(function (){
+        $(".bt").click(function () {
+            var data = $('form').serialize();
+            console.log(data)
+            $.ajax({
+                type:"put",
+                url:"/updateproduct",
+                data:data,
+                success:function (e) {
+                    if(e == "ok"){
+                        console.log("ok")
+                        layer.msg('修改成功！',{icon:1 ,time:2000});
+                        setTimeout("window.location.replace('/index')",2000)
+                    }
+                }
+            })
+        })
+    })
+</script>
+
+<div style="margin-left: 50px ;margin-top: 20px" >
+   <form>
+       <input type="hidden" name="id" th:value="${products.id}"><br>
+       商品名称：<input name="productName" th:value="${products.productName}"><br>
+       <br>
+       商品价格：<input name="price" th:value="${products.price}"><br>
+       <br>
+       商品类型：<input name="productType" th:value="${products.productType}"><br>
+       <br>
+       商品描述：<input name="productDesc" th:value="${products.productDesc}"><br>
+       <br>
+       商品品牌：<input name="productBrand" th:value="${products.productBrand}"><br>
+       <br>
+       <button type="button" class="bt">提交</button>
+   </form>
+</div>
+
+
+</body>
+</html>
