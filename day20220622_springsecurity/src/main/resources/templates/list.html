@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品首页</title>
+</head>
+<script src="js/jquery.min.js"></script>
+<!-- 引入 layui.css -->
+<link href="//unpkg.com/layui@2.6.11/dist/css/layui.css" rel="stylesheet">
+<!-- 引入 layui.js -->
+<script src="//unpkg.com/layui@2.6.11/dist/layui.js"></script>
+<style>
+    img{
+        height: 60px;
+    }
+</style>
+<body>
+<script>
+    $(function (){
+        $(".delete").click(function () {
+            var id = $(this).parent().parent().children("td:eq(0)").text();
+            console.log(id)
+            $.ajax({
+                type:"delete",
+                url:"/delete/de",
+                data:{id:id},
+                success:function (e) {
+                    if(e == "true"){
+                        console.log("ok")
+                        layer.msg('删除成功！',{icon:1 ,time:2000});
+                        setTimeout("window.location.replace('/index')",2000)
+                    }
+                }
+            })
+        })
+    })
+</script>
+<div style="margin-left: 50px ;margin-top: 20px" >
+    <a href="addpage">添加商品</a><br>
+    <br>
+    <table border="1px" cellpadding="0" cellspacing="0" width="70%">
+        <tr>
+            <th >商品编号</th>
+            <th >商品名称</th>
+            <th >商品图片</th>
+            <th >商品价格</th>
+            <th >创建时间</th>
+            <th colspan="2">操作</th>
+        </tr>
+            <tr th:each="p : ${page.records}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.productName}"></td>
+                <td  >
+                    <img th:src="@{'/image/upload/'+ ${p.productImage}}"/>
+
+                </td>
+                <td th:text="${p.price}"></td>
+                <td th:text="${p.createTime}"></td>
+                <td><a th:href="@{update/{id}(id=${p.id})}">修改</a></td>
+                <td><a href="#" class="delete">删除</a></td>
+            </tr>
+    </table>
+<div>
+    <a th:href="@{index(current=${i})}" th:each="i : ${#numbers.sequence(1,page.pages)}" th:text="${i}"> </a>
+</div>
+</div>
+
+
+</body>
+</html>
