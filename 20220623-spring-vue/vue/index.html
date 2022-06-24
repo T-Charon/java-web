@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息首页</title>
+    <!--引入vue/axios/qs-->
+    <script src="js/axios.min.js"></script>
+    <script src="js/qs.js"></script>
+    <script src="js/vue.js"></script>
+    <!-- 引入 layui.css -->
+    <link href="//unpkg.com/layui@2.6.11/dist/css/layui.css" rel="stylesheet">
+    <!-- 引入 layui.js -->
+    <script src="//unpkg.com/layui@2.6.11/dist/layui.js"></script>
+
+    <style>
+        table{
+            text-align: center;
+        }
+        button{
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <br>
+    <div id="app">
+
+        <table width="380px" class="layui-table">
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th colspan="2">操作</th>
+            </tr>
+            <!--v-for 循环遍历persons集合-->
+            <tr v-for="person in persons">
+                <td>{{person.id}}</td>
+                <td>{{person.name}}</td>
+                <td>{{person.age}}</td>
+                <td>{{person.sex}}</td>
+                <td><button @click="update(person)">更新</button></td>
+                <td><button @click="del(person.id)">删除</button></td>
+            </tr>
+        </table>
+        <p></p>
+        <br>
+        <div style="margin-left: 10px" >
+            <input v-model="person.id" type="hidden">
+            姓名：<input v-model="person.name" placeholder="请输入姓名">
+            年龄：<input v-model="person.age"  placeholder="请输入年龄">
+            性别：<input v-model="person.sex"  placeholder="请输入性别">
+            <button @click="save()">保存</button>
+        </div>
+        <br>
+        <!--分页操作-->
+        <button><span @click="prevPage(current)">上一页</span></button>
+<!--        <a v-for="i in persons[0].page" @click="toPage(i)" href="#"> {{i}}</a>-->
+<!--        <span>当前第{{current}}页,总共{{persons[0].page}}页</span>-->
+        <button><span @click="nextPage(current)">下一页</span></button>
+
+
+
+    </div>
+
+    <script>
+        new Vue({
+            //初始默认值
+
+            //作用范围
+            el:"#app",
+            data:{
+                current:1,
+                map:{person:""},
+                //定义存放input输入框添加时的数组
+                person:{id:"",name:"",age:"",sex:"",page:""},
+                persons:[]
+            },
+            //调用事件的方法
+            methods:{
+
+                //查询分页数据
+                loadList(current){
+                    axios.get("http://localhost:8080/limit/"+this.current)
+                        .then(result =>{
+                            console.log(result.data)
+                            //处理后台数据(将后台res.data数据与persons集合绑定)
+                            this.persons = result.data;
+                        })
+                },
+
+                //点击上一页
+                prevPage(){
+                    this.current = this.current-1,
+                    axios.get("http://localhost:8080/limit/"+this.current)
+                        .then(result =>{
+                            //处理后台数据(将后台res.data数据与persons集合绑定)
+                            this.persons = result.data;
+                        })
+                },
+                //点击下一页
+                nextPage(){
+                    this.current = this.current+1,
+                    axios.get("http://localhost:8080/limit/"+this.current)
+                        .then(result =>{
+                            console.log(this.current)
+                            //处理后台数据(将后台res.data数据与persons集合绑定)
+                            this.persons = result.data;
+                        })
+                },
+
+                //点击下一页
+                toPage(i){
+                    this.current = i,
+                        axios.get("http://localhost:8080/limit/"+i)
+                            .then(result =>{
+                                console.log(this.current)
+                                //处理后台数据(将后台res.data数据与persons集合绑定)
+                                this.persons = result.data;
+                            })
+                },
+
+                //保存按钮
+                save(){
+                    //判断id是否存在
+                    var flag = false;
+                    for(var i = 0;i < this.persons.length ; i++) {
+                        //id存在
+                        if (this.persons[i].id == this.person.id) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag){
+                        //更新
+                        axios.put("http://localhost:8080/person",this.person)
+                            .then(result =>{
+                                if(result.data == "ok"){
+                                    layer.msg('更新成功！',{icon:1,time:2000});
+                                    this.person ={id:"",name:"",age:"",sex:""};
+                                    setTimeout(this.loadList(this.current),2000);
+                                }
+                            })
+                        }
+                    else {
+                        //添加功能
+                        axios.post("http://localhost:8080/person",
+                            Qs.stringify(this.person))
+                            .then(result =>{
+                                console.log(result.data)
+                                if(result.data == "ok"){
+                                    layer.msg('添加成功！',{icon:1,time:2000});
+                                    this.person ={id:"",name:"",age:"",sex:""};
+                                    setTimeout(this.loadList(this.current),2000)
+                                }
+                            })
+                        }
+
+                },
+
+                //更新回填
+                update(person){
+                    this.person.id = person.id;
+                    this.person.name = person.name;
+                    this.person.age = person.age;
+                    this.person.sex = person.sex;
+                },
+
+                //删除
+                del(id){
+                    axios.delete("http://localhost:8080/person/" +id)
+                        .then(result =>{
+                            console.log(id)
+                            if(result.data == "ok"){
+                                layer.msg('删除成功！',{icon:1,time:2000});
+                                setTimeout(this.loadList(),2000)
+                            }
+                        })
+                }
+            },
+
+            //钩子函数，在Vue创建实例后执行
+            created(){
+                //查询所有数据
+                this.loadList(this.current)
+            }
+        })
+    </script>
+</body>
+</html>
