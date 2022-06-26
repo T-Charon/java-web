@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.blb.day_20220625_springboot.mapper.ProductMapper">
+
+
+    <!--id为dao层接口的方法名,resultType为实体类全路径-->
+    <select id="selectProductPage" resultType="Product">
+
+        select s_product.id id,s_product.product_name ,s_product.product_image ,s_product.price ,s_product_type.product_type_name product_type ,s_product.product_desc,s_brand.brand_name product_brand ,s_product.create_time  from s_product
+        left join s_product_type on  s_product.product_type =s_product_type.id
+        left join s_brand on s_brand.id =s_product.product_brand
+    </select>
+
+
+</mapper>
