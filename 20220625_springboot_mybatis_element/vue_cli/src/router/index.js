@@ -5,12 +5,18 @@ import User from "@/views/User";
 import Brand from "@/views/Brand";
 import Product from "@/views/Product";
 import ProductType from "@/views/ProductType";
+import Login from "@/views/Login";
 Vue.use(VueRouter)
 
 /*路由规则*/
 const routes = [
   {
-    path: '/',  /*路径  开始页面*/
+    path: '/',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/index',  /*路径  开始页面*/
     name: 'Index', /*名字*/
     component: Index, /*组件*/
     children:[

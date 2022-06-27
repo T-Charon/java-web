@@ -147,12 +147,7 @@
 
                     })
 
-                this.brands.forEach((v,i) => {
-                    // v.brandImg ="'" + "../assets/" + v.brandImg + "'"
-                    v.brandImg = "../assets/" + v.brandImg
 
-                });
-                console.log(this.brands);
             },
 
             //保存人员信息

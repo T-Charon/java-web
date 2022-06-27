@@ -53,7 +53,7 @@
 
 <script>
     export default {
-        name: "Person.vue",
+        name: "Index.vue",
         methods: {
             goBack() {
                 console.log('go back');

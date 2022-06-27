@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.blb.day_20220625_springboot.entity.Person;
 import com.blb.day_20220625_springboot.entity.User;
 import com.blb.day_20220625_springboot.service.IUserService;
+import com.blb.day_20220625_springboot.utils.ResposeResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ import java.util.UUID;
 public class UserController {
     @Autowired
     private IUserService userService;
+
+    @GetMapping("users")
+    public ResposeResult<List<User>> getUsers(){
+        return ResposeResult.ok(userService.list(null));
+    }
 
     @ApiOperation("查询所有用户数据")
     @GetMapping("userList")
