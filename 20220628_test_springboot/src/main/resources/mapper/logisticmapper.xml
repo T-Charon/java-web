@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.blb.springboot.mapper.LogisticsMapper">
+
+
+    <!--id为dao层接口的方法名,resultType为实体类全路径-->
+    <select id="selectAll" resultType="LLogistic">
+       select ll.id id, lg.name goods_id ,delivery_time
+        ,arrival_time,number,concat(la.province,la.city,la.area) address_delivery_id,
+        concat(la1.province,la1.city,la1.area) address_arrival_id
+        from l_logistic ll left join
+        l_goods lg on ll.goods_id = lg.id
+        left join l_address la on ll.address_delivery_id = la.id
+        left join l_address la1 on ll.address_arrival_id = la1.id
+    </select>
+
+
+</mapper>
