@@ -12,4 +12,6 @@ import com.blb.day_20220625_springboot.entity.User;
 public interface BrandMapper extends BaseMapper<Brand> {
 
     IPage<Brand> selectBrandPage(IPage<Brand> page);
+
+    Brand getBrandByName(String brandName);
 }

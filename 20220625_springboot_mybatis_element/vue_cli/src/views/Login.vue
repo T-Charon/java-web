@@ -1,9 +1,25 @@
 <template>
-    <div>
-        <span>{{msg}}</span>
-        <el-input v-model="username"></el-input><br>
-        <el-input v-model="password" type="password"></el-input><br>
-        <el-button type="primary" @click="handleLogin">登录</el-button>
+    <div class="demo">
+        <el-form  status-icon   label-width="100px" class="demo-ruleForm"  >
+            <div style="margin-left: 60px">登录系统</div>
+            <br>
+            <el-form-item label="姓名" prop="pass">
+                <el-input type="text" v-model="username" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="checkPass">
+                <el-input type="password" v-model="password" autocomplete="off"></el-input>
+            </el-form-item>
+
+            <el-form-item>
+                <el-button type="primary" @click="handleLogin">登录</el-button>
+                <el-button @click="ruleForm">重置</el-button>
+            </el-form-item>
+
+<!--        <span>{{msg}}</span>-->
+<!--        <el-input v-model="username"></el-input><br>-->
+<!--        <el-input v-model="password" type="password"></el-input><br>-->
+<!--        <el-button type="primary" @click="handleLogin">登录</el-button>-->
+        </el-form>
     </div>
 
 </template>
@@ -15,10 +31,14 @@
             return{
                 username:"",
                 password:"",
-                msg:""
+                msg:"",
+
             }
         },
         methods:{
+            ruleForm(){
+                this.username="", this.password="", this.msg=""
+            },
             handleLogin(){
                 this.axios.post("http://localhost:8080/login",
                     this.qs.stringify({"username":this.username,"password":this.password}))
@@ -39,5 +59,7 @@
 </script>
 
 <style scoped>
-
+    .demo-ruleForm{
+        width: 400px;
+    }
 </style>

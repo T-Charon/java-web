@@ -134,11 +134,11 @@
 
                 this.axios.get("http://localhost:8080/productTypeListPage/"+this.current+"/"+this.pageSize)
                     .then(result =>{
-                        console.log(result.data)
+                        console.log(result.data.data)
                         //处理后台数据(将后台result.data数据与users集合绑定)
-                        this.productTypes = result.data.records;
-                        this.total = result.data.total;
-                        this.current = result.data.current;
+                        this.productTypes = result.data.data.records;
+                        this.total = result.data.data.total;
+                        this.current = result.data.data.current;
 
                     })
             },
@@ -150,8 +150,8 @@
                     this.axios.post("http://localhost:8080/productType",
                         this.qs.stringify(this.productType))
                         .then(result =>{
-                            console.log(result.data)
-                            if(result.data == "ok"){
+                            console.log(result.data.data)
+                            if(result.data.data == "ok"){
                                 this.$message({
                                     message: '添加成功',
                                     type: 'success',
@@ -165,8 +165,8 @@
                     //修改
                     this.axios.put("http://localhost:8080/productType", this.productType)
                         .then(result =>{
-                            console.log(result.data)
-                            if(result.data == "ok"){
+                            console.log(result.data.data)
+                            if(result.data.data == "ok"){
                                 this.$message({
                                     message: '修改成功',
                                     type: 'success',
@@ -204,7 +204,7 @@
                 console.log(index, row);
                 this.axios.delete("http://localhost:8080/productType/"+row.id)
                     .then(result =>{
-                        console.log(result.data)
+                        console.log(result.data.data)
                         if(result.data == "ok" ){
                             this.$message({
                                 message: '删除成功',

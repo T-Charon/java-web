@@ -26,4 +26,9 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     public IPage<Brand> getPage(Long current, Long size) {
         return brandMapper.selectBrandPage(new Page<>(current,size));
     }
+
+    @Override
+    public Brand getBrandByName(String brandName) {
+        return brandMapper.getBrandByName(brandName);
+    }
 }

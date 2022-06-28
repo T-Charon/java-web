@@ -1,12 +1,14 @@
 package com.blb.day_20220625_springboot.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.blb.day_20220625_springboot.entity.Brand;
 import com.blb.day_20220625_springboot.entity.Product;
+import com.blb.day_20220625_springboot.service.IBrandService;
 import com.blb.day_20220625_springboot.service.IProductService;
+import com.blb.day_20220625_springboot.utils.ResposeResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -26,49 +28,58 @@ public class ProductController {
     @Autowired
     private IProductService productService;
 
+    @Autowired
+    private IBrandService brandService;
+
     @ApiOperation("查询所有商品数据")
     @GetMapping("ProductList")
-    public ResponseEntity<List<Product>> getUserPage(){
+    public ResposeResult<List<Product>> getUserPage(){
         List<Product> list = productService.list(null);
-        return ResponseEntity.ok(list);
+        return ResposeResult.ok(list);
     }
 
     @ApiOperation("查询分页商品数据")
     @GetMapping("productListPage/{current}/{pageSize}")
-    public ResponseEntity<IPage<Product>> getLimitPage(@PathVariable Long current, @PathVariable Long pageSize){
+    public ResposeResult<IPage<Product>> getLimitPage(@PathVariable Long current, @PathVariable Long pageSize){
         System.out.println(current);
         IPage<Product> page = productService.getPage(current, pageSize);
         System.out.println(page.getRecords());
-        return ResponseEntity.ok(page);
+        return ResposeResult.ok(page);
     }
 
     @ApiOperation("新增商品数据")
     @PostMapping("product")
-    public ResponseEntity<String> addProduct(Product product){
+    public ResposeResult<String> addProduct(Product product){
 
         product.setId(UUID.randomUUID().toString().replace("-","").trim());
         product.setCreateTime(LocalDateTime.now());
+        Brand brand = brandService.getBrandByName(product.getProductBrand());
+        product.setProductBrand(brand.getId());
+        product.setProductType(brand.getBrandType());
         System.out.println(product);
         productService.save(product);
-        return ResponseEntity.ok("ok");
+        return ResposeResult.ok("ok");
     }
 
 
     @ApiOperation("修改商品信息")
     @PutMapping("product")
-    public ResponseEntity<String> updateProduct(@RequestBody Product product){
+    public ResposeResult<String> updateProduct(@RequestBody Product product){
         product.setCreateTime(LocalDateTime.now());
+        Brand brand = brandService.getBrandByName(product.getProductBrand());
+        product.setProductBrand(brand.getId());
+        product.setProductType(brand.getBrandType());
         System.out.println(product);
         productService.updateById(product);
-        return ResponseEntity.ok("ok");
+        return ResposeResult.ok("ok");
     }
 
 
     @ApiOperation("删除商品信息")
     @DeleteMapping("product/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable String id){
+    public ResposeResult<String> deleteProduct(@PathVariable String id){
         productService.removeById(id);
-        return ResponseEntity.ok("ok");
+        return ResposeResult.ok("ok");
 
 
     }

@@ -25,9 +25,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         //获得用户名
         User user = (User) authentication.getPrincipal();
         //将用户名生成jwt token
-        String token = JwtUtil.generateToken(user.getUsername(), RsaUtil.privateKey, JwtUtil.EXPIRE_MINUTES);
+        String token = JwtUtil.generateToken(user.getUsername(),RsaUtil.privateKey, JwtUtil.EXPIRE_MINUTES);
         //将token 发送给前端
 
+        System.out.println(token);
         UserVo userVo = new UserVo(user.getUsername(),token);
 
         ResposeResult.write(response,ResposeResult.ok(userVo));

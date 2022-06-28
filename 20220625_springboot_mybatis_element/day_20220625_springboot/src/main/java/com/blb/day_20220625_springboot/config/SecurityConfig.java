@@ -43,53 +43,68 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService);
     }
 
+    /**
+     * 页面资源的授权
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //配置放行url
-        http.authorizeRequests()
-                .antMatchers("/login","/logout").permitAll()
-                .anyRequest().authenticated()               //配置其它url要验证
+        //对请求进行授权
+        http
+                .authorizeRequests()
+                .antMatchers(
+                        "/swagger-ui.html","/v2/**","/swagger-resources/**","/webjars/springfox-swagger-ui/**", //放行swagger相关
+                        "/js/**","/css/**", //放行静态资源
+                        "/login","logout"  //放行登录和登出
+                )
+                .permitAll()
+                .anyRequest()
+                .authenticated()  //其它的请求需要登录
                 .and()
-                .formLogin()                                //配置登录相关
-                .successHandler(new LoginSuccessHandler())  //配置登录成功的处理器
-                .failureHandler((req,resp,auth) -> {        //配置登录失败的处理器
-                    ResposeResult.write(resp, ResposeResult.error(ResponseStatus.LOGIN_ERROR));
+                .formLogin()//登录配置
+                .successHandler(new LoginSuccessHandler()) //登录成功处理
+                .failureHandler((req,resp,auth) -> {//进行登录失败的处理
+                    ResposeResult.write(resp,ResposeResult.error(ResponseStatus.LOGIN_ERROR));
                 })
                 .and()
-                .exceptionHandling()
-                .authenticationEntryPoint((req,resp,auth) ->{ //配置拦截未登录请求的处理
+                .exceptionHandling() //未进行登录请求的处理
+                .authenticationEntryPoint((req,resp,auth)->{
                     ResposeResult.write(resp,ResposeResult.error(ResponseStatus.AUTHENTICATE_ERROR));
                 })
                 .and()
-                .logout()
-                .logoutSuccessHandler((req,resp,auth) ->{     //配置登出处理器
-                    ResposeResult.write(resp,ResposeResult.ok("注销成功"));
+                .logout()//登出配置
+                .logoutSuccessHandler((req,resp,auth) -> {
+                    ResposeResult.write(resp, ResposeResult.ok("注销成功"));
                 })
-                .clearAuthentication(true)                     //清除验证缓存
+                .clearAuthentication(true)
                 .and()
-                .cors()
-                .configurationSource(corsConfigurationSource())// 配置跨域
+                .cors() //跨域配置
+                .configurationSource(corsConfigurationSource())
                 .and()
                 .csrf()
-                .disable()                                    //关闭csrf保护
+                .disable() //关闭CSRF防御
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //不使用session
                 .and()
-                .addFilter(new TokenAuthenticationFilter(authenticationManager())); //把token解析过滤器添加到过滤器链中
-
+                .addFilter(new TokenAuthenticationFilter(authenticationManager())); //添加token验证过滤器
     }
 
+
+    /**
+     * 跨域配置对象
+     * @return
+     */
     @Bean
-    public CorsConfigurationSource corsConfigurationSource(){
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         //配置允许访问的服务器域名
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8081",
-                "http://localhost:63342"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8081"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true); //允许cookie
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); //注册到所有url
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }

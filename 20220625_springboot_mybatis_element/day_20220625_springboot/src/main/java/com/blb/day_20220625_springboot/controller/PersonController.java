@@ -1,13 +1,13 @@
 package com.blb.day_20220625_springboot.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import com.blb.day_20220625_springboot.entity.Person;
 import com.blb.day_20220625_springboot.service.IPersonService;
+import com.blb.day_20220625_springboot.utils.ResposeResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 
 import org.springframework.web.bind.annotation.*;
 
@@ -30,10 +30,10 @@ public class PersonController {
 
     @ApiOperation("查询数据")
     @GetMapping("list")
-    public ResponseEntity<List<Person>> getPersonPage(){
+    public ResposeResult<List<Person>> getPersonPage(){
 
         List<Person> persons = personService.list(null);
-        return ResponseEntity.ok(persons);
+        return ResposeResult.ok(persons);
     }
 
 
@@ -43,7 +43,7 @@ public class PersonController {
 //     */
 //    @ApiOperation("分页查询数据")
 //    @GetMapping("limit/{current}")
-//    public ResponseEntity<List<Person>> getPersonPage(@PathVariable Long current){
+//    public ResposeResult<List<Person>> getPersonPage(@PathVariable Long current){
 //        //判断当前页数是否为第一页
 //        if(current < 1){
 //            current = 1L;
@@ -56,33 +56,33 @@ public class PersonController {
 //        for (Person p : personList) {
 //            p.setPage(totalPage);
 //        }
-//        return ResponseEntity.ok(personList);
+//        return ResposeResult.ok(personList);
 //    }
 
 
     @ApiOperation("新增人员信息")
     @PostMapping("person")
-    public ResponseEntity<String> addPerson(Person person){
+    public ResposeResult<String> addPerson(Person person){
         System.out.println(person);
         //保存person信息
         personService.save(person);
-        return ResponseEntity.ok("ok");
+        return ResposeResult.ok("ok");
     }
 
     @ApiOperation("修改人员信息")
     @PutMapping ("person")
-    public ResponseEntity<String> updatePerson(@RequestBody Person person){
+    public ResposeResult<String> updatePerson(@RequestBody Person person){
 
         personService.updateById(person);
-        return ResponseEntity.ok("ok");
+        return ResposeResult.ok("ok");
     }
 
 
     @ApiOperation("删除人员信息")
     @DeleteMapping("person/{id}")
-    public ResponseEntity<String> deletePerson(@PathVariable int id){
+    public ResposeResult<String> deletePerson(@PathVariable int id){
         personService.removeById(id);
-        return ResponseEntity.ok("ok");
+        return ResposeResult.ok("ok");
     }
 
 

@@ -108,7 +108,7 @@
 </template>
 
 <script>
-    import {Popconfirm} from "element-ui";
+
 
     export default {
         name: "Brand.vue",
@@ -141,9 +141,9 @@
                 this.axios.get("http://localhost:8080/brandListPage/"+this.current+"/"+this.pageSize)
                     .then(result =>{
                         //处理后台数据(将后台result.data数据与users集合绑定)
-                        this.brands = result.data.records;
-                        this.total = result.data.total;
-                        this.current = result.data.current;
+                        this.brands = result.data.data.records;
+                        this.total = result.data.data.total;
+                        this.current = result.data.data.current;
 
                     })
 
@@ -157,8 +157,7 @@
                     this.axios.post("http://localhost:8080/brand",
                         this.qs.stringify(this.brand))
                         .then(result =>{
-                            console.log(result.data)
-                            if(result.data == "ok"){
+                            if(result.data.data == "ok"){
                                 this.$message({
                                     message: '添加成功',
                                     type: 'success',
@@ -172,8 +171,8 @@
                     //修改
                     this.axios.put("http://localhost:8080/brand", this.brand)
                         .then(result =>{
-                            console.log(result.data)
-                            if(result.data == "ok"){
+                            console.log(result.data.data)
+                            if(result.data.data == "ok"){
                                 this.$message({
                                     message: '修改成功',
                                     type: 'success',
@@ -211,8 +210,8 @@
                 console.log(index, row);
                 this.axios.delete("http://localhost:8080/brand/"+row.id)
                     .then(result =>{
-                        console.log(result.data)
-                        if(result.data == "ok" ){
+                        console.log(result.data.data)
+                        if(result.data.data == "ok" ){
                             this.$message({
                                 message: '删除成功',
                                 type: 'success',
@@ -234,8 +233,8 @@
             //查询所有品牌类型信息
             this.axios.get("http://localhost:8080/productTypeName")
                 .then(result =>{
-                    console.log(result.data)
-                    this.options = result.data;
+
+                    this.options = result.data.data;
 
 
                 })

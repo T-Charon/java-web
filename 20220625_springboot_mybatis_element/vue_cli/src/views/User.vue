@@ -122,13 +122,14 @@
             loadUserList(current){
                 //分页
 
+                console.log("123")
                 this.axios.get("http://localhost:8080/userListPage/"+this.current+"/"+this.pageSize)
                     .then(result =>{
-                        console.log(result.data)
+
                         //处理后台数据(将后台result.data数据与users集合绑定)
-                        this.users = result.data.records;
-                        this.total = result.data.total;
-                        this.current = result.data.current;
+                        this.users = result.data.data.records;
+                        this.total = result.data.data.total;
+                        this.current = result.data.data.current;
 
                     })
             },
@@ -141,7 +142,7 @@
                             this.qs.stringify(this.user))
                             .then(result =>{
                                 console.log(result.data)
-                                if(result.data == "ok"){
+                                if(result.data.c == "ok"){
                                     this.$message({
                                         message: '添加成功',
                                         type: 'success',
@@ -156,7 +157,7 @@
                         this.axios.put("http://localhost:8080/user", this.user)
                             .then(result =>{
                                 console.log(result.data)
-                                if(result.data == "ok"){
+                                if(result.data.data== "ok"){
                                     this.$message({
                                         message: '修改成功',
                                         type: 'success',
@@ -192,7 +193,7 @@
                 this.axios.delete("http://localhost:8080/user/"+row.id)
                     .then(result =>{
                         console.log(result.data)
-                        if(result.data == "ok" ){
+                        if(result.data.data == "ok" ){
                             this.$message({
                                 message: '删除成功',
                                 type: 'success',

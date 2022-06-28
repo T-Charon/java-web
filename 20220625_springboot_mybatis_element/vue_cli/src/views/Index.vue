@@ -57,7 +57,7 @@
         methods: {
             goBack() {
                 console.log('go back');
-                this.$router.push('/')
+                this.$router.push('/index')
             }
 
         },

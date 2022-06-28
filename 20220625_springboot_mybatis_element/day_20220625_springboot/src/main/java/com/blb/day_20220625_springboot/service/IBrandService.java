@@ -17,4 +17,6 @@ public interface IBrandService extends IService<Brand> {
      * @return
      */
     IPage<Brand> getPage(Long current, Long size);
+
+    Brand getBrandByName(String brandName);
 }

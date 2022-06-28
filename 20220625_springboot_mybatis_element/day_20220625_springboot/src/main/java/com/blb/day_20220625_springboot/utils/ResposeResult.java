@@ -6,6 +6,7 @@ package com.blb.day_20220625_springboot.utils;
  **/
 
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 
 /**
  * 响应内容
@@ -55,9 +56,9 @@ public class   ResposeResult<T> {
     public static void write(HttpServletResponse resp, ResposeResult result) throws IOException {
         resp.setContentType("application/json;charset=UTF-8");
         String msg = new ObjectMapper().writeValueAsString(result);
-        PrintWriter writer = resp.getWriter();
-        writer.write(msg);
-        writer.close();
+        resp.getWriter().print(msg);
+        resp.getWriter().close();
+
     }
 
 

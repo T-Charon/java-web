@@ -13,5 +13,8 @@
     </select>
 
 
+    <select id="getBrandByName" resultType="Brand">
+        select * from s_brand where brand_name =#{brandName}
+    </select>
 
 </mapper>
