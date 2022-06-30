@@ -1,4 +1,4 @@
-package com.blb.day_20220625_springboot.config;
+package com.blb.fastdfs.config;
 
 import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
