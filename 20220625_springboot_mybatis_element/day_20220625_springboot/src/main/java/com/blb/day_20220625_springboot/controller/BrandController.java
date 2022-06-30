@@ -28,6 +28,7 @@ public class BrandController {
     @Autowired
     private IBrandService brandService;
 
+
     @Autowired
     private IProductTypeService productTypeService;
 

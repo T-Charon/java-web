@@ -28,8 +28,20 @@
                 </el-form-item>
 
                 <el-form-item label="品牌图片" :label-width="formLabelWidth">
-                    <el-input v-model="brand.brandImg" autocomplete="off"></el-input>
+                    <el-input v-model="brand.brandImg" autocomplete="off" style="display: none" ></el-input>
+                    <el-upload
+                            action="http://localhost:8080/upload"
+                            list-type="picture-card"
+                            :on-preview="handlePictureCardPreview"
+                            :on-remove="handleRemove">
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <el-dialog :visible.sync="dialogVisible">
+                        <img width="100%" :src="dialogImageUrl" alt="">
+                    </el-dialog>
                 </el-form-item>
+
+
 
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -120,6 +132,9 @@
                 brands: [],  //品牌集合
                 dialogFormVisible: false,  //对话框是否显示
 
+                dialogImageUrl: '', //图片地址
+                dialogVisible: false,
+
                 brand:{
                     id:"-1",        //设置默认值为-1（若为-1表示新增）
                     brandName:"",
@@ -130,6 +145,14 @@
             }
         },
         methods: {
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePictureCardPreview(file) {
+                this.dialogImageUrl = file.url;
+                console.log(this.dialogImageUrl)
+                this.dialogVisible = true;
+            },
 
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
@@ -152,6 +175,9 @@
 
             //保存人员信息
             save(){
+
+
+
                 if(this.brand.id == "-1"){
                     //新增
                     this.axios.post("http://localhost:8080/brand",
@@ -186,11 +212,15 @@
                         })
 
                 }
+                console.log()
+
 
                 //清空表单
                 this.brand={id:"-1", brandName:"", brandType:"", brandImg:""}
                 //关闭表单
                 this.dialogFormVisible = false;
+
+
 
 
             },
