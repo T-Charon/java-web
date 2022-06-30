@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blb.springboot.mapping.ArticleMapping">
+
+    <!--一对多关系-->
+
+    <resultMap id="a" type="com.blb.springboot.entity.Article" >
+        <id property="articleId" column="article_id" ></id>
+        <id property="title" column="title" ></id>
+        <id property="articleContent" column="article_content" ></id>
+        <id property="releaseTime" column="release_time" ></id>
+        <collection property="comments" ofType="com.blb.springboot.entity.Comment">
+            <id property="id" column="id" ></id>
+            <id property="content" column="content" ></id>
+            <id property="time" column="time" ></id>
+            <id property="articleId" column="c_article_id" ></id>
+        </collection>
+    </resultMap>
+
+    <select id="getAll" resultMap="a">
+        select a.article_id article_id,a.title title ,a.article_content article_content
+        ,a.release_time release_time,c.id id,c.content content,c.time time
+        ,c.article_id c_article_id from article a left join comment c on
+        a.article_id = c.article_id
+    </select>
+
+    <select id="getByTitleOrContent">
+        select a.article_id article_id,a.title title ,a.article_content article_content
+        ,a.release_time release_time,c.id id,c.content content,c.time time
+        ,c.article_id c_article_id from article a left join comment c on
+        a.article_id = c.article_id where connect like "%"${content}"%"
+    </select>
+</mapper>
