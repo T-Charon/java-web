@@ -26,4 +26,25 @@ public interface IArticleService extends IService<Article> {
      * @return
      */
     List<Article> getByTitleOrContent(Article article);
+
+    /**
+     * 添加文章
+     * @param article
+     * @return
+     */
+    Article addArticle(Article article);
+
+    /**
+     * 修改文章
+     * @param article
+     * @return
+     */
+    Article updateArticle(Article article);
+
+    /**
+     * 删除文章
+     * @param articleId
+     */
+    void deleteArticle(Long articleId);
+
 }

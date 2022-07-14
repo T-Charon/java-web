@@ -2,6 +2,8 @@ package com.blb.springboot.controller;
 
 import com.blb.springboot.entity.Article;
 import com.blb.springboot.service.IArticleService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
  * @Date 2022/6/29
  **/
 
+@Api
 @CrossOrigin
 @RestController
 public class ArticleController {
@@ -23,6 +26,7 @@ public class ArticleController {
      * 查询所有文章
      * @return
      */
+    @ApiOperation("查询所有文章")
     @GetMapping("articleList")
     public ResponseEntity<List<Article>> seleteAll(){
         List<Article> articleList = articleService.getAll();
@@ -42,6 +46,7 @@ public class ArticleController {
     }
 
 
+    @ApiOperation("增加文章")
     @PostMapping("article")
     public ResponseEntity<String> add(Article article){
         articleService.save(article);
@@ -49,6 +54,7 @@ public class ArticleController {
     }
 
 
+    @ApiOperation("更新文章")
     @PutMapping("article")
     public ResponseEntity<String> update(@RequestBody Article article){
         articleService.updateById(article);
@@ -56,6 +62,7 @@ public class ArticleController {
     }
 
 
+    @ApiOperation("删除文章")
     @DeleteMapping("article/{articleId}")
     public ResponseEntity<String> delete(@PathVariable Long articleId){
         System.out.println(articleId);
