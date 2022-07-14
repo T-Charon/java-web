@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test.mapper.InfoMapper">
+    <resultMap id="a" type="info">
+        <id property="code" column="code" ></id>
+        <id property="directorId" column="director_id" ></id>
+        <id property="goodsName" column="goods_name" ></id>
+        <id property="price" column="price" ></id>
+        <id property="orderId" column="order_id" ></id>
+        <id property="time" column="time" ></id>
+        <id property="director" column="director" ></id>
+
+    </resultMap>
+
+
+    <select id="getList" resultMap="a">
+        select *  from info  left join director  on info.director_id = director.id
+    </select>
+
+</mapper>
