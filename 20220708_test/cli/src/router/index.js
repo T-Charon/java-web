@@ -2,15 +2,16 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 
-import index from "@/views/index";
-import goods from "@/views/goods";
+// import index from "@/views/index";
+// import goods from "@/views/goods";
+import Employess from "@/views/Employess";
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'goods',
-    component: goods
+    name: 'Employess',
+    component: Employess
   },
 
 

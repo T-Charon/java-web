@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test.mapper.EmployessMapper">
+    <resultMap id="a" type="employees">
+        <id property="id" column="id" ></id>
+        <id property="name" column="name" ></id>
+        <id property="age" column="age" ></id>
+        <id property="sex" column="sex" ></id>
+        <id property="commencementDate" column="commencement_date" ></id>
+        <id property="address" column="address" ></id>
+        <id property="deptId" column="dept_id" ></id>
+        <id property="deptName" column="dept_name" ></id>
+
+    </resultMap>
+
+
+    <select id="getList" resultMap="a">
+        select *  from employees left join dept  on employees.dept_id = dept.dept_id
+        <where>
+            <if test="name != null and name.trim() !=''">
+                and name  like concat ('%',#{name},'%' )
+            </if>
+            <if test="deptId != null ">
+                and employees.dept_id = #{deptId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

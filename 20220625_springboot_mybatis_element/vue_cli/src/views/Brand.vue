@@ -28,9 +28,9 @@
                 </el-form-item>
 
                 <el-form-item label="品牌图片" :label-width="formLabelWidth">
-                    <el-input v-model="brand.brandImg" autocomplete="off" style="display: none" ></el-input>
+<!--                    <el-input v-model="brand.brandImg" autocomplete="off" style="display: none" ></el-input>-->
                     <el-upload
-                            action="http://localhost:8080/upload"
+                            :action="action"
                             list-type="picture-card"
                             :on-preview="handlePictureCardPreview"
                             :on-remove="handleRemove">
@@ -39,6 +39,7 @@
                     <el-dialog :visible.sync="dialogVisible">
                         <img width="100%" :src="dialogImageUrl" alt="">
                     </el-dialog>
+
                 </el-form-item>
 
 
@@ -133,6 +134,7 @@
                 dialogFormVisible: false,  //对话框是否显示
 
                 dialogImageUrl: '', //图片地址
+                action:"http://localhost:8080/upload",
                 dialogVisible: false,
 
                 brand:{
