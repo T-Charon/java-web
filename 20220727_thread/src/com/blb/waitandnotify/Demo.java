@@ -39,7 +39,6 @@ public class Demo {
         Demo demo = new Demo();
         new Thread(demo::aThread).start();
 
-
         new Thread(demo::bThread).start();
 
     }
