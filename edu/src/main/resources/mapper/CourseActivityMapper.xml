@@ -24,4 +24,107 @@
         status,is_del,remark,
         create_time,update_time
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from course_activity
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from course_activity
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.CourseActivity" useGeneratedKeys="true">
+        insert into course_activity
+        ( id,course_id,begin_time
+        ,end_time,amount,stock
+        ,status,is_del,remark
+        ,create_time,update_time)
+        values (#{id,jdbcType=INTEGER},#{courseId,jdbcType=INTEGER},#{beginTime,jdbcType=TIMESTAMP}
+        ,#{endTime,jdbcType=TIMESTAMP},#{amount,jdbcType=INTEGER},#{stock,jdbcType=INTEGER}
+        ,#{status,jdbcType=TINYINT},#{isDel,jdbcType=BOOLEAN},#{remark,jdbcType=VARCHAR}
+        ,#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.CourseActivity" useGeneratedKeys="true">
+        insert into course_activity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="courseId != null">course_id,</if>
+                <if test="beginTime != null">begin_time,</if>
+                <if test="endTime != null">end_time,</if>
+                <if test="amount != null">amount,</if>
+                <if test="stock != null">stock,</if>
+                <if test="status != null">status,</if>
+                <if test="isDel != null">is_del,</if>
+                <if test="remark != null">remark,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null"> #{id,jdbcType=INTEGER},</if>
+                <if test="courseId != null"> #{courseId,jdbcType=INTEGER},</if>
+                <if test="beginTime != null"> #{beginTime,jdbcType=TIMESTAMP},</if>
+                <if test="endTime != null"> #{endTime,jdbcType=TIMESTAMP},</if>
+                <if test="amount != null"> #{amount,jdbcType=INTEGER},</if>
+                <if test="stock != null"> #{stock,jdbcType=INTEGER},</if>
+                <if test="status != null"> #{status,jdbcType=TINYINT},</if>
+                <if test="isDel != null"> #{isDel,jdbcType=BOOLEAN},</if>
+                <if test="remark != null"> #{remark,jdbcType=VARCHAR},</if>
+                <if test="createTime != null"> #{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null"> #{updateTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.blb.edu.pojo.CourseActivity">
+        update course_activity
+        <set>
+                <if test="courseId != null">
+                    course_id = #{courseId,jdbcType=INTEGER},
+                </if>
+                <if test="beginTime != null">
+                    begin_time = #{beginTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="endTime != null">
+                    end_time = #{endTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="amount != null">
+                    amount = #{amount,jdbcType=INTEGER},
+                </if>
+                <if test="stock != null">
+                    stock = #{stock,jdbcType=INTEGER},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=TINYINT},
+                </if>
+                <if test="isDel != null">
+                    is_del = #{isDel,jdbcType=BOOLEAN},
+                </if>
+                <if test="remark != null">
+                    remark = #{remark,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.blb.edu.pojo.CourseActivity">
+        update course_activity
+        set 
+            course_id =  #{courseId,jdbcType=INTEGER},
+            begin_time =  #{beginTime,jdbcType=TIMESTAMP},
+            end_time =  #{endTime,jdbcType=TIMESTAMP},
+            amount =  #{amount,jdbcType=INTEGER},
+            stock =  #{stock,jdbcType=INTEGER},
+            status =  #{status,jdbcType=TINYINT},
+            is_del =  #{isDel,jdbcType=BOOLEAN},
+            remark =  #{remark,jdbcType=VARCHAR},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
 </mapper>

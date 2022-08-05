@@ -19,4 +19,81 @@
         description,create_time,update_time,
         is_del
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from teacher
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from teacher
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.Teacher" useGeneratedKeys="true">
+        insert into teacher
+        ( id,teacher_name,position
+        ,description,create_time,update_time
+        ,is_del)
+        values (#{id,jdbcType=INTEGER},#{teacherName,jdbcType=VARCHAR},#{position,jdbcType=VARCHAR}
+        ,#{description,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}
+        ,#{isDel,jdbcType=BOOLEAN})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.Teacher" useGeneratedKeys="true">
+        insert into teacher
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="teacherName != null">teacher_name,</if>
+                <if test="position != null">position,</if>
+                <if test="description != null">description,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="updateTime != null">update_time,</if>
+                <if test="isDel != null">is_del,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null"> #{id,jdbcType=INTEGER},</if>
+                <if test="teacherName != null"> #{teacherName,jdbcType=VARCHAR},</if>
+                <if test="position != null"> #{position,jdbcType=VARCHAR},</if>
+                <if test="description != null"> #{description,jdbcType=VARCHAR},</if>
+                <if test="createTime != null"> #{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null"> #{updateTime,jdbcType=TIMESTAMP},</if>
+                <if test="isDel != null"> #{isDel,jdbcType=BOOLEAN},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.blb.edu.pojo.Teacher">
+        update teacher
+        <set>
+                <if test="teacherName != null">
+                    teacher_name = #{teacherName,jdbcType=VARCHAR},
+                </if>
+                <if test="position != null">
+                    position = #{position,jdbcType=VARCHAR},
+                </if>
+                <if test="description != null">
+                    description = #{description,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isDel != null">
+                    is_del = #{isDel,jdbcType=BOOLEAN},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.blb.edu.pojo.Teacher">
+        update teacher
+        set 
+            teacher_name =  #{teacherName,jdbcType=VARCHAR},
+            position =  #{position,jdbcType=VARCHAR},
+            description =  #{description,jdbcType=VARCHAR},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP},
+            is_del =  #{isDel,jdbcType=BOOLEAN}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
 </mapper>

@@ -13,4 +13,55 @@
     <sql id="Base_Column_List">
         id,orientation_name,parent_id
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from course_orientation
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from course_orientation
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.CourseOrientation" useGeneratedKeys="true">
+        insert into course_orientation
+        ( id,orientation_name,parent_id
+        )
+        values (#{id,jdbcType=INTEGER},#{orientationName,jdbcType=VARCHAR},#{parentId,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.CourseOrientation" useGeneratedKeys="true">
+        insert into course_orientation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="orientationName != null">orientation_name,</if>
+                <if test="parentId != null">parent_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null"> #{id,jdbcType=INTEGER},</if>
+                <if test="orientationName != null"> #{orientationName,jdbcType=VARCHAR},</if>
+                <if test="parentId != null"> #{parentId,jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.blb.edu.pojo.CourseOrientation">
+        update course_orientation
+        <set>
+                <if test="orientationName != null">
+                    orientation_name = #{orientationName,jdbcType=VARCHAR},
+                </if>
+                <if test="parentId != null">
+                    parent_id = #{parentId,jdbcType=INTEGER},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.blb.edu.pojo.CourseOrientation">
+        update course_orientation
+        set 
+            orientation_name =  #{orientationName,jdbcType=VARCHAR},
+            parent_id =  #{parentId,jdbcType=INTEGER}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
 </mapper>

@@ -29,4 +29,135 @@
         file_dk,create_time,update_time,
         is_del,duration_num,file_id
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from course_media
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from course_media
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.CourseMedia" useGeneratedKeys="true">
+        insert into course_media
+        ( id,course_id,section_id
+        ,lesson_id,cover_image_url,duration
+        ,file_edk,file_size,file_name
+        ,file_dk,create_time,update_time
+        ,is_del,duration_num,file_id
+        )
+        values (#{id,jdbcType=INTEGER},#{courseId,jdbcType=INTEGER},#{sectionId,jdbcType=INTEGER}
+        ,#{lessonId,jdbcType=INTEGER},#{coverImageUrl,jdbcType=VARCHAR},#{duration,jdbcType=VARCHAR}
+        ,#{fileEdk,jdbcType=VARCHAR},#{fileSize,jdbcType=DOUBLE},#{fileName,jdbcType=VARCHAR}
+        ,#{fileDk,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}
+        ,#{isDel,jdbcType=BOOLEAN},#{durationNum,jdbcType=INTEGER},#{fileId,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.CourseMedia" useGeneratedKeys="true">
+        insert into course_media
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="courseId != null">course_id,</if>
+                <if test="sectionId != null">section_id,</if>
+                <if test="lessonId != null">lesson_id,</if>
+                <if test="coverImageUrl != null">cover_image_url,</if>
+                <if test="duration != null">duration,</if>
+                <if test="fileEdk != null">file_edk,</if>
+                <if test="fileSize != null">file_size,</if>
+                <if test="fileName != null">file_name,</if>
+                <if test="fileDk != null">file_dk,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="updateTime != null">update_time,</if>
+                <if test="isDel != null">is_del,</if>
+                <if test="durationNum != null">duration_num,</if>
+                <if test="fileId != null">file_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null"> #{id,jdbcType=INTEGER},</if>
+                <if test="courseId != null"> #{courseId,jdbcType=INTEGER},</if>
+                <if test="sectionId != null"> #{sectionId,jdbcType=INTEGER},</if>
+                <if test="lessonId != null"> #{lessonId,jdbcType=INTEGER},</if>
+                <if test="coverImageUrl != null"> #{coverImageUrl,jdbcType=VARCHAR},</if>
+                <if test="duration != null"> #{duration,jdbcType=VARCHAR},</if>
+                <if test="fileEdk != null"> #{fileEdk,jdbcType=VARCHAR},</if>
+                <if test="fileSize != null"> #{fileSize,jdbcType=DOUBLE},</if>
+                <if test="fileName != null"> #{fileName,jdbcType=VARCHAR},</if>
+                <if test="fileDk != null"> #{fileDk,jdbcType=VARCHAR},</if>
+                <if test="createTime != null"> #{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null"> #{updateTime,jdbcType=TIMESTAMP},</if>
+                <if test="isDel != null"> #{isDel,jdbcType=BOOLEAN},</if>
+                <if test="durationNum != null"> #{durationNum,jdbcType=INTEGER},</if>
+                <if test="fileId != null"> #{fileId,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.blb.edu.pojo.CourseMedia">
+        update course_media
+        <set>
+                <if test="courseId != null">
+                    course_id = #{courseId,jdbcType=INTEGER},
+                </if>
+                <if test="sectionId != null">
+                    section_id = #{sectionId,jdbcType=INTEGER},
+                </if>
+                <if test="lessonId != null">
+                    lesson_id = #{lessonId,jdbcType=INTEGER},
+                </if>
+                <if test="coverImageUrl != null">
+                    cover_image_url = #{coverImageUrl,jdbcType=VARCHAR},
+                </if>
+                <if test="duration != null">
+                    duration = #{duration,jdbcType=VARCHAR},
+                </if>
+                <if test="fileEdk != null">
+                    file_edk = #{fileEdk,jdbcType=VARCHAR},
+                </if>
+                <if test="fileSize != null">
+                    file_size = #{fileSize,jdbcType=DOUBLE},
+                </if>
+                <if test="fileName != null">
+                    file_name = #{fileName,jdbcType=VARCHAR},
+                </if>
+                <if test="fileDk != null">
+                    file_dk = #{fileDk,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isDel != null">
+                    is_del = #{isDel,jdbcType=BOOLEAN},
+                </if>
+                <if test="durationNum != null">
+                    duration_num = #{durationNum,jdbcType=INTEGER},
+                </if>
+                <if test="fileId != null">
+                    file_id = #{fileId,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.blb.edu.pojo.CourseMedia">
+        update course_media
+        set 
+            course_id =  #{courseId,jdbcType=INTEGER},
+            section_id =  #{sectionId,jdbcType=INTEGER},
+            lesson_id =  #{lessonId,jdbcType=INTEGER},
+            cover_image_url =  #{coverImageUrl,jdbcType=VARCHAR},
+            duration =  #{duration,jdbcType=VARCHAR},
+            file_edk =  #{fileEdk,jdbcType=VARCHAR},
+            file_size =  #{fileSize,jdbcType=DOUBLE},
+            file_name =  #{fileName,jdbcType=VARCHAR},
+            file_dk =  #{fileDk,jdbcType=VARCHAR},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP},
+            is_del =  #{isDel,jdbcType=BOOLEAN},
+            duration_num =  #{durationNum,jdbcType=INTEGER},
+            file_id =  #{fileId,jdbcType=VARCHAR}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
 </mapper>

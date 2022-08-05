@@ -20,4 +20,95 @@
         context,log_status,log_created,
         log_modified,ext,rollback_info
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from undo_log
+        where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from undo_log
+        where  id = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.UndoLog" useGeneratedKeys="true">
+        insert into undo_log
+        ( id,branch_id,xid
+        ,context,log_status,log_created
+        ,log_modified,ext,rollback_info
+        )
+        values (#{id,jdbcType=BIGINT},#{branchId,jdbcType=BIGINT},#{xid,jdbcType=VARCHAR}
+        ,#{context,jdbcType=VARCHAR},#{logStatus,jdbcType=INTEGER},#{logCreated,jdbcType=TIMESTAMP}
+        ,#{logModified,jdbcType=TIMESTAMP},#{ext,jdbcType=VARCHAR},#{rollbackInfo,jdbcType=BLOB}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.UndoLog" useGeneratedKeys="true">
+        insert into undo_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="branchId != null">branch_id,</if>
+                <if test="xid != null">xid,</if>
+                <if test="context != null">context,</if>
+                <if test="logStatus != null">log_status,</if>
+                <if test="logCreated != null">log_created,</if>
+                <if test="logModified != null">log_modified,</if>
+                <if test="ext != null">ext,</if>
+                <if test="rollbackInfo != null">rollback_info,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null"> #{id,jdbcType=BIGINT},</if>
+                <if test="branchId != null"> #{branchId,jdbcType=BIGINT},</if>
+                <if test="xid != null"> #{xid,jdbcType=VARCHAR},</if>
+                <if test="context != null"> #{context,jdbcType=VARCHAR},</if>
+                <if test="logStatus != null"> #{logStatus,jdbcType=INTEGER},</if>
+                <if test="logCreated != null"> #{logCreated,jdbcType=TIMESTAMP},</if>
+                <if test="logModified != null"> #{logModified,jdbcType=TIMESTAMP},</if>
+                <if test="ext != null"> #{ext,jdbcType=VARCHAR},</if>
+                <if test="rollbackInfo != null"> #{rollbackInfo,jdbcType=BLOB},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.blb.edu.pojo.UndoLog">
+        update undo_log
+        <set>
+                <if test="branchId != null">
+                    branch_id = #{branchId,jdbcType=BIGINT},
+                </if>
+                <if test="xid != null">
+                    xid = #{xid,jdbcType=VARCHAR},
+                </if>
+                <if test="context != null">
+                    context = #{context,jdbcType=VARCHAR},
+                </if>
+                <if test="logStatus != null">
+                    log_status = #{logStatus,jdbcType=INTEGER},
+                </if>
+                <if test="logCreated != null">
+                    log_created = #{logCreated,jdbcType=TIMESTAMP},
+                </if>
+                <if test="logModified != null">
+                    log_modified = #{logModified,jdbcType=TIMESTAMP},
+                </if>
+                <if test="ext != null">
+                    ext = #{ext,jdbcType=VARCHAR},
+                </if>
+                <if test="rollbackInfo != null">
+                    rollback_info = #{rollbackInfo,jdbcType=BLOB},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.blb.edu.pojo.UndoLog">
+        update undo_log
+        set 
+            branch_id =  #{branchId,jdbcType=BIGINT},
+            xid =  #{xid,jdbcType=VARCHAR},
+            context =  #{context,jdbcType=VARCHAR},
+            log_status =  #{logStatus,jdbcType=INTEGER},
+            log_created =  #{logCreated,jdbcType=TIMESTAMP},
+            log_modified =  #{logModified,jdbcType=TIMESTAMP},
+            ext =  #{ext,jdbcType=VARCHAR},
+            rollback_info =  #{rollbackInfo,jdbcType=BLOB}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
 </mapper>

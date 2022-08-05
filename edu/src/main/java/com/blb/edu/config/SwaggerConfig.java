@@ -1,4 +1,4 @@
-package com.group01.community.config;
+package com.blb.edu.config;
 
 import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
@@ -66,7 +66,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("智慧社区管理系统后台")
+                .title("在线教育系统后台")
                 .description("RESTFul接口文档说明")
                 .version("1.0")
                 .build();

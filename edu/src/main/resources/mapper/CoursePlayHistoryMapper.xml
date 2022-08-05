@@ -23,4 +23,101 @@
         history_highest_node,create_time,update_time,
         is_del
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from course_play_history
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from course_play_history
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.CoursePlayHistory" useGeneratedKeys="true">
+        insert into course_play_history
+        ( id,user_id,course_id
+        ,section_id,lesson_id,history_node
+        ,history_highest_node,create_time,update_time
+        ,is_del)
+        values (#{id,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{courseId,jdbcType=INTEGER}
+        ,#{sectionId,jdbcType=INTEGER},#{lessonId,jdbcType=INTEGER},#{historyNode,jdbcType=INTEGER}
+        ,#{historyHighestNode,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}
+        ,#{isDel,jdbcType=BOOLEAN})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.blb.edu.pojo.CoursePlayHistory" useGeneratedKeys="true">
+        insert into course_play_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="userId != null">user_id,</if>
+                <if test="courseId != null">course_id,</if>
+                <if test="sectionId != null">section_id,</if>
+                <if test="lessonId != null">lesson_id,</if>
+                <if test="historyNode != null">history_node,</if>
+                <if test="historyHighestNode != null">history_highest_node,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="updateTime != null">update_time,</if>
+                <if test="isDel != null">is_del,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null"> #{id,jdbcType=INTEGER},</if>
+                <if test="userId != null"> #{userId,jdbcType=INTEGER},</if>
+                <if test="courseId != null"> #{courseId,jdbcType=INTEGER},</if>
+                <if test="sectionId != null"> #{sectionId,jdbcType=INTEGER},</if>
+                <if test="lessonId != null"> #{lessonId,jdbcType=INTEGER},</if>
+                <if test="historyNode != null"> #{historyNode,jdbcType=INTEGER},</if>
+                <if test="historyHighestNode != null"> #{historyHighestNode,jdbcType=INTEGER},</if>
+                <if test="createTime != null"> #{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null"> #{updateTime,jdbcType=TIMESTAMP},</if>
+                <if test="isDel != null"> #{isDel,jdbcType=BOOLEAN},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.blb.edu.pojo.CoursePlayHistory">
+        update course_play_history
+        <set>
+                <if test="userId != null">
+                    user_id = #{userId,jdbcType=INTEGER},
+                </if>
+                <if test="courseId != null">
+                    course_id = #{courseId,jdbcType=INTEGER},
+                </if>
+                <if test="sectionId != null">
+                    section_id = #{sectionId,jdbcType=INTEGER},
+                </if>
+                <if test="lessonId != null">
+                    lesson_id = #{lessonId,jdbcType=INTEGER},
+                </if>
+                <if test="historyNode != null">
+                    history_node = #{historyNode,jdbcType=INTEGER},
+                </if>
+                <if test="historyHighestNode != null">
+                    history_highest_node = #{historyHighestNode,jdbcType=INTEGER},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isDel != null">
+                    is_del = #{isDel,jdbcType=BOOLEAN},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.blb.edu.pojo.CoursePlayHistory">
+        update course_play_history
+        set 
+            user_id =  #{userId,jdbcType=INTEGER},
+            course_id =  #{courseId,jdbcType=INTEGER},
+            section_id =  #{sectionId,jdbcType=INTEGER},
+            lesson_id =  #{lessonId,jdbcType=INTEGER},
+            history_node =  #{historyNode,jdbcType=INTEGER},
+            history_highest_node =  #{historyHighestNode,jdbcType=INTEGER},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP},
+            is_del =  #{isDel,jdbcType=BOOLEAN}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
 </mapper>

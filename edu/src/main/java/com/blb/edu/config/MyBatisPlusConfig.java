@@ -1,4 +1,4 @@
-package com.group01.community.config;
+package com.blb.edu.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author : iuoly
+ * @author Charon
  * date : 2022/6/28
  */
 @Configuration
