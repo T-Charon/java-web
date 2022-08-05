@@ -1,13 +1,9 @@
 package com.example.test.controller;
 
 import com.example.test.entity.Dept;
-import com.example.test.entity.Director;
 import com.example.test.entity.Employees;
-import com.example.test.entity.Info;
 import com.example.test.service.IDeptService;
-import com.example.test.service.IDirectorService;
 import com.example.test.service.IEmployessService;
-import com.example.test.service.IInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +24,7 @@ public class EmployessController {
     private IEmployessService iEmployessService;
 
 
-
-    @Autowired
+    @Autowired()
     private IDeptService deptService;
 
     @ApiOperation("查询所有员工信息")

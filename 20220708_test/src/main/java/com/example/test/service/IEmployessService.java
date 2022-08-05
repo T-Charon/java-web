@@ -2,7 +2,6 @@ package com.example.test.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.test.entity.Employees;
-import com.example.test.entity.Info;
 
 import java.util.List;
 
