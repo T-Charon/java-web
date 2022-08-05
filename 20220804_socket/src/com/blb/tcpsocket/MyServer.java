@@ -1,11 +1,10 @@
-package com.blb.socket;
+package com.blb.tcpsocket;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.security.PublicKey;
 import java.util.Date;
 
 /**

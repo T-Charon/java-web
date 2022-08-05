@@ -1,4 +1,4 @@
-package com.blb.socket;
+package com.blb.tcpsocket;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
