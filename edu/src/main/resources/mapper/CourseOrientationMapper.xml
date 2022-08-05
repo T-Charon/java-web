@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blb.edu.mapper.CourseOrientationMapper">
+
+    <resultMap id="BaseResultMap" type="com.blb.edu.pojo.CourseOrientation">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="orientationName" column="orientation_name" jdbcType="VARCHAR"/>
+            <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,orientation_name,parent_id
+    </sql>
+</mapper>
