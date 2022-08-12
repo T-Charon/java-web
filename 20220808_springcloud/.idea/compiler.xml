@@ -7,15 +7,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="20220808_springcloud" />
         <module name="eureka_server" />
-        <module name="product_service" />
+        <module name="mysql_order_service" />
+        <module name="comment_api" />
         <module name="order_service" />
+        <module name="mysql_gateway_service" />
+        <module name="mysql_product_service" />
+        <module name="product_service" />
+        <module name="mysql_user_service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="20220808_springcloud" target="1.8" />
+      <module name="comment_api" target="1.8" />
       <module name="eureka_server" target="1.8" />
+      <module name="mysql_gateway_service" target="1.8" />
+      <module name="mysql_order_service" target="1.8" />
+      <module name="mysql_product_service" target="1.8" />
+      <module name="mysql_user_service" target="1.8" />
       <module name="order_service" target="1.8" />
       <module name="product_service" target="1.8" />
     </bytecodeTargetLevel>
@@ -23,7 +32,12 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="20220808_springcloud" options="-parameters" />
+      <module name="comment_api" options="-parameters" />
       <module name="eureka_server" options="-parameters" />
+      <module name="mysql_gateway_service" options="-parameters" />
+      <module name="mysql_order_service" options="-parameters" />
+      <module name="mysql_product_service" options="-parameters" />
+      <module name="mysql_user_service" options="-parameters" />
       <module name="order_service" options="-parameters" />
       <module name="product_service" options="-parameters" />
     </option>
