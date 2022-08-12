@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/20220808_springcloud.iml" filepath="$PROJECT_DIR$/20220808_springcloud.iml" />
       <module fileurl="file://$PROJECT_DIR$/comment_api/comment_api.iml" filepath="$PROJECT_DIR$/comment_api/comment_api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config_service/config_service.iml" filepath="$PROJECT_DIR$/config_service/config_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka_server/eureka_server.iml" filepath="$PROJECT_DIR$/eureka_server/eureka_server.iml" />
       <module fileurl="file://$PROJECT_DIR$/mysql_gateway_service/mysql_gateway_service.iml" filepath="$PROJECT_DIR$/mysql_gateway_service/mysql_gateway_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/mysql_order_service/mysql_order_service.iml" filepath="$PROJECT_DIR$/mysql_order_service/mysql_order_service.iml" />

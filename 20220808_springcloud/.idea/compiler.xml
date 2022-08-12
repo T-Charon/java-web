@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka_server" />
+        <module name="config_service" />
         <module name="mysql_order_service" />
         <module name="comment_api" />
         <module name="order_service" />
@@ -20,6 +21,7 @@
     <bytecodeTargetLevel>
       <module name="20220808_springcloud" target="1.8" />
       <module name="comment_api" target="1.8" />
+      <module name="config_service" target="1.8" />
       <module name="eureka_server" target="1.8" />
       <module name="mysql_gateway_service" target="1.8" />
       <module name="mysql_order_service" target="1.8" />
@@ -33,6 +35,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="20220808_springcloud" options="-parameters" />
       <module name="comment_api" options="-parameters" />
+      <module name="config_service" options="-parameters" />
       <module name="eureka_server" options="-parameters" />
       <module name="mysql_gateway_service" options="-parameters" />
       <module name="mysql_order_service" options="-parameters" />
