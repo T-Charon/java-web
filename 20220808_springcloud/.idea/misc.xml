@@ -16,6 +16,7 @@
         <option value="$PROJECT_DIR$/mysql_user_service/pom.xml" />
         <option value="$PROJECT_DIR$/config_service/pom.xml" />
         <option value="$PROJECT_DIR$/mysql_promotion_service/pom.xml" />
+        <option value="$PROJECT_DIR$/nacos_server/pom.xml" />
       </list>
     </option>
   </component>

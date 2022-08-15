@@ -7,15 +7,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="product_service" />
         <module name="eureka_server" />
         <module name="config_service" />
-        <module name="mysql_promotion_service" />
         <module name="mysql_order_service" />
         <module name="comment_api" />
         <module name="order_service" />
         <module name="mysql_gateway_service" />
         <module name="mysql_product_service" />
-        <module name="product_service" />
+        <module name="mysql_promotion_service" />
         <module name="mysql_user_service" />
       </profile>
     </annotationProcessing>
@@ -24,11 +24,13 @@
       <module name="comment_api" target="1.8" />
       <module name="config_service" target="1.8" />
       <module name="eureka_server" target="1.8" />
+      <module name="eureka_server (1)" target="1.8" />
       <module name="mysql_gateway_service" target="1.8" />
       <module name="mysql_order_service" target="1.8" />
       <module name="mysql_product_service" target="1.8" />
       <module name="mysql_promotion_service" target="1.8" />
       <module name="mysql_user_service" target="1.8" />
+      <module name="nacos_server" target="1.8" />
       <module name="order_service" target="1.8" />
       <module name="product_service" target="1.8" />
     </bytecodeTargetLevel>
@@ -39,11 +41,13 @@
       <module name="comment_api" options="-parameters" />
       <module name="config_service" options="-parameters" />
       <module name="eureka_server" options="-parameters" />
+      <module name="eureka_server (1)" options="-parameters" />
       <module name="mysql_gateway_service" options="-parameters" />
       <module name="mysql_order_service" options="-parameters" />
       <module name="mysql_product_service" options="-parameters" />
       <module name="mysql_promotion_service" options="-parameters" />
       <module name="mysql_user_service" options="-parameters" />
+      <module name="nacos_server" options="-parameters" />
       <module name="order_service" options="-parameters" />
       <module name="product_service" options="-parameters" />
     </option>
