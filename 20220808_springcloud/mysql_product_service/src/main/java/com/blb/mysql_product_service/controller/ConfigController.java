@@ -24,8 +24,10 @@ public class ConfigController {
     @Value("${spring.datasource.password}")
     private String password;
 
+
     @GetMapping("/product/config")
     public String config(){
         return driverName + " " + url;
     }
+
 }

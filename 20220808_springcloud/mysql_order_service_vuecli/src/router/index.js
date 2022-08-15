@@ -5,6 +5,8 @@ import Index from "@/views/Index";
 import OrderIndex from "@/views/OrderIndex";
 import Product from "@/views/Product";
 import Login from "@/views/Login";
+import PromotionAd from "@/views/PromotionAd";
+import PromotionSpace from "@/views/PromotionSpace";
 
 Vue.use(VueRouter)
 
@@ -34,7 +36,21 @@ const routes = [
         component: function () {
           return import('../views/Product.vue')
         }
-      }
+      },
+      {
+        path: '/promotionad',
+        name: 'PromotionAd',
+        component: function () {
+          return import('../views/PromotionAd.vue')
+        }
+      },
+      {
+        path: '/promotionspace',
+        name: 'PromotionSpace',
+        component: function () {
+          return import('../views/PromotionSpace.vue')
+        }
+      },
 
     ],
   },

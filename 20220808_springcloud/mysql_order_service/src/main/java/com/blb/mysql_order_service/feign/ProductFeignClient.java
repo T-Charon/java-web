@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @Author Charon
  * @Date 2022/8/10
  **/
-@FeignClient("mysql-product-server")
+@FeignClient("mysql-product-service")
 public interface ProductFeignClient {
 
     @GetMapping("/product/{id}")

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka_server" />
         <module name="config_service" />
+        <module name="mysql_promotion_service" />
         <module name="mysql_order_service" />
         <module name="comment_api" />
         <module name="order_service" />
@@ -26,6 +27,7 @@
       <module name="mysql_gateway_service" target="1.8" />
       <module name="mysql_order_service" target="1.8" />
       <module name="mysql_product_service" target="1.8" />
+      <module name="mysql_promotion_service" target="1.8" />
       <module name="mysql_user_service" target="1.8" />
       <module name="order_service" target="1.8" />
       <module name="product_service" target="1.8" />
@@ -40,6 +42,7 @@
       <module name="mysql_gateway_service" options="-parameters" />
       <module name="mysql_order_service" options="-parameters" />
       <module name="mysql_product_service" options="-parameters" />
+      <module name="mysql_promotion_service" options="-parameters" />
       <module name="mysql_user_service" options="-parameters" />
       <module name="order_service" options="-parameters" />
       <module name="product_service" options="-parameters" />

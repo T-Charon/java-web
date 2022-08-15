@@ -1,4 +1,4 @@
-package com.blb.mysql_product_service.config;
+package com.blb.config_service.config;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;

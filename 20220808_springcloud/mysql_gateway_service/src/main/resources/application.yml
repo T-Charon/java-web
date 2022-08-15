@@ -15,12 +15,12 @@ spring:
     gateway:
       routes:
       - id: order-server-route
-        uri: lb://mysql-order-server  #服务名称
+        uri: lb://mysql-order-service  #服务名称
         predicates: #断言
         - Path=/orderlist/**,/order/**  #匹配路径
 
       - id: product-server-route
-        uri: lb://mysql-product-server  #服务名称
+        uri: lb://mysql-product-service  #服务名称
         predicates: #断言
         - Path=/productlist/**,/product/**  #匹配路径
 
@@ -28,6 +28,11 @@ spring:
         uri: lb://mysql-user-service  #服务名称
         predicates: #断言
         - Path=/login,/logout,/user/**  #匹配路径
+
+      - id: promotion-server-route
+        uri: lb://mysql-promotion-service  #服务名称
+        predicates: #断言
+        - Path=/promotionadlist/**,/promotionspacelist/**,/promotionad/**,/promotionspace/**,/upload  #匹配路径
 
       globalcors:
         cors-configurations: # 跨域配置

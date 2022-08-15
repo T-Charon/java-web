@@ -2,7 +2,7 @@
     <div >
         <el-container style="height: 700px; border: 1px solid #eee">
             <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-                <el-menu :default-openeds="['1']">
+                <el-menu :default-openeds="['1','2']">
                     <el-submenu index="1">
                         <template slot="title"><i class="el-icon-setting"></i>系统管理</template>
                         <el-menu-item-group>
@@ -11,6 +11,15 @@
                         </el-menu-item-group>
 
                     </el-submenu>
+                    <el-submenu index="2">
+                        <template slot="title"><i class="el-icon-setting"></i>广告管理</template>
+                        <el-menu-item-group>
+                            <el-menu-item index="1-1" ><router-link to="/promotionad" style="text-decoration: none">课程管理</router-link></el-menu-item>
+                            <el-menu-item index="1-2"><router-link to="/promotionspace" style="text-decoration: none">方位管理</router-link> </el-menu-item>
+                        </el-menu-item-group>
+
+                    </el-submenu>
+
 
                 </el-menu>
 

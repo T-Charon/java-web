@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/mysql_gateway_service/mysql_gateway_service.iml" filepath="$PROJECT_DIR$/mysql_gateway_service/mysql_gateway_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/mysql_order_service/mysql_order_service.iml" filepath="$PROJECT_DIR$/mysql_order_service/mysql_order_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/mysql_product_service/mysql_product_service.iml" filepath="$PROJECT_DIR$/mysql_product_service/mysql_product_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mysql_promotion_service/mysql_promotion_service.iml" filepath="$PROJECT_DIR$/mysql_promotion_service/mysql_promotion_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/mysql_user_service/mysql_user_service.iml" filepath="$PROJECT_DIR$/mysql_user_service/mysql_user_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/order_service/order_service.iml" filepath="$PROJECT_DIR$/order_service/order_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/product_service/product_service.iml" filepath="$PROJECT_DIR$/product_service/product_service.iml" />
