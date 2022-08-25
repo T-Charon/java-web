@@ -27,7 +27,7 @@ public class JobWorker {
         pusher.push(openId2);
     }
 
-    @Scheduled(cron = "0 0 9-21/2 * * ?")
+    @Scheduled(cron = "0 0 9-21/1 * * ?")
     public void drink(){
         pusher.pushDrink(openId);
         pusher.pushDrink(openId2);
