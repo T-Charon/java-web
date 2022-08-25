@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.charon.edu_course_service.mapper.CourseMapper">
+
+    <resultMap id="getCourse" type="com.charon.comment.entity.Course">
+            <result property="id" column="c_id" jdbcType="INTEGER"/>
+            <result property="courseName" column="c_course_name" jdbcType="VARCHAR"/>
+            <result property="brief" column="c_brief" jdbcType="VARCHAR"/>
+            <result property="price" column="c_price" jdbcType="DOUBLE"/>
+            <result property="priceTag" column="c_price_tag" jdbcType="VARCHAR"/>
+            <result property="discounts" column="c_discounts" jdbcType="DOUBLE"/>
+            <result property="discountsTag" column="c_discounts_tag" jdbcType="VARCHAR"/>
+            <result property="courseDescriptionMarkDown" column="c_course_description_mark_down" jdbcType="VARCHAR"/>
+            <result property="courseDescription" column="c_course_description" jdbcType="VARCHAR"/>
+            <result property="courseImgUrl" column="c_course_img_url" jdbcType="VARCHAR"/>
+            <result property="isNew" column="c_is_new" jdbcType="BOOLEAN"/>
+            <result property="isNewDes" column="c_is_new_des" jdbcType="VARCHAR"/>
+            <result property="lastOperatorId" column="c_last_operator_id" jdbcType="INTEGER"/>
+            <result property="autoOnlineTime" column="c_auto_online_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="c_create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="c_update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDel" column="c_is_del" jdbcType="BOOLEAN"/>
+            <result property="totalDuration" column="c_total_duration" jdbcType="INTEGER"/>
+            <result property="status" column="c_status" jdbcType="INTEGER"/>
+            <result property="sortNum" column="c_sort_num" jdbcType="INTEGER"/>
+            <result property="previewFirstField" column="c_preview_first_field" jdbcType="VARCHAR"/>
+            <result property="previewSecondField" column="c_preview_second_field" jdbcType="VARCHAR"/>
+            <result property="sales" column="c_sales" jdbcType="INTEGER"/>
+            <result property="typeId" column="c_type_id" jdbcType="INTEGER"/>
+            <result property="orientationId" column="c_orientation_id" jdbcType="INTEGER"/>
+            <result property="teacherId" column="c_teacher_id" jdbcType="INTEGER"/>
+        <!--课程方向-->
+        <association property="orientation" javaType="com.charon.comment.entity.CourseOrientation">
+            <result property="id" column="co_id" jdbcType="INTEGER"/>
+            <result property="orientationName" column="co_orientation_name" jdbcType="VARCHAR"/>
+            <result property="parentId" column="co_parent_id" jdbcType="INTEGER"/>
+            <association property="parent" javaType="com.charon.comment.entity.CourseOrientation">
+                <id property="id" column="co1_id" jdbcType="INTEGER"/>
+                <result property="orientationName" column="co1_orientation_name" jdbcType="VARCHAR"/>
+                <result property="parentId" column="co1_parent_id" jdbcType="INTEGER"/>
+            </association>
+        </association>
+
+        <!--课程类型-->
+        <association property="type" javaType="com.charon.comment.entity.CourseType">
+            <result property="id" column="ct_id" jdbcType="INTEGER"/>
+            <result property="typeName" column="ct_type_name" jdbcType="VARCHAR"/>
+        </association>
+
+        <!--讲师-->
+        <association property="teacher" javaType="com.charon.comment.entity.Teacher">
+            <result property="id" column="t_id" jdbcType="INTEGER"/>
+            <result property="teacherName" column="t_teacher_name" jdbcType="VARCHAR"/>
+            <result property="position" column="t_position" jdbcType="VARCHAR"/>
+            <result property="description" column="t_description" jdbcType="VARCHAR"/>
+            <result property="createTime" column="t_create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="t_update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDel" column="t_is_del" jdbcType="BOOLEAN"/>
+        </association>
+
+        <!--课程活动-->
+        <association property="courseActivity" javaType="com.charon.comment.entity.CourseActivity">
+            <result property="id" column="ca_id" jdbcType="INTEGER"/>
+            <result property="courseId" column="ca_course_id" jdbcType="INTEGER"/>
+            <result property="beginTime" column="ca_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="endTime" column="ca_end_time" jdbcType="TIMESTAMP"/>
+            <result property="amount" column="ca_amount" jdbcType="INTEGER"/>
+            <result property="stock" column="ca_stock" jdbcType="INTEGER"/>
+            <result property="status" column="ca_status" jdbcType="TINYINT"/>
+            <result property="isDel" column="ca_is_del" jdbcType="BOOLEAN"/>
+            <result property="remark" column="ca_remark" jdbcType="VARCHAR"/>
+            <result property="createTime" column="ca_create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="ca_update_time" jdbcType="TIMESTAMP"/>
+        </association>
+
+        <!--章节-->
+        <collection property="courseSections" ofType="com.charon.comment.entity.CourseSection">
+            <result property="id" column="cs_id" jdbcType="INTEGER"/>
+            <result property="courseId" column="cs_course_id" jdbcType="INTEGER"/>
+            <result property="sectionName" column="cs_section_name" jdbcType="VARCHAR"/>
+            <result property="description" column="cs_description" jdbcType="VARCHAR"/>
+            <result property="createTime" column="cs_create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="cs_update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDel" column="cs_is_del" jdbcType="BOOLEAN"/>
+            <result property="orderNum" column="cs_order_num" jdbcType="INTEGER"/>
+            <result property="status" column="cs_status" jdbcType="INTEGER"/>
+            <collection property="courseLessons" ofType="com.charon.comment.entity.CourseLesson">
+                <result property="id" column="cl_ id" jdbcType="INTEGER"/>
+                <result property="courseId" column="cl_course_id" jdbcType="INTEGER"/>
+                <result property="sectionId" column="cl_section_id" jdbcType="INTEGER"/>
+                <result property="theme" column="cl_theme" jdbcType="VARCHAR"/>
+                <result property="duration" column="cl_duration" jdbcType="INTEGER"/>
+                <result property="isFree" column="cl_is_free" jdbcType="BOOLEAN"/>
+                <result property="createTime" column="cl_create_time" jdbcType="TIMESTAMP"/>
+                <result property="updateTime" column="cl_update_time" jdbcType="TIMESTAMP"/>
+                <result property="isDel" column="cl_is_del" jdbcType="BOOLEAN"/>
+                <result property="orderNum" column="cl_order_num" jdbcType="INTEGER"/>
+                <result property="status" column="cl_status" jdbcType="INTEGER"/>
+                <association property="courseMedia" javaType="com.charon.comment.entity.CourseMedia">
+                    <result property="id" column="cm_id" jdbcType="INTEGER"/>
+                    <result property="courseId" column="cm_course_id" jdbcType="INTEGER"/>
+                    <result property="sectionId" column="cm_section_id" jdbcType="INTEGER"/>
+                    <result property="lessonId" column="cm_lesson_id" jdbcType="INTEGER"/>
+                    <result property="coverImageUrl" column="cm_cover_image_url" jdbcType="VARCHAR"/>
+                    <result property="duration" column="cm_duration" jdbcType="VARCHAR"/>
+                    <result property="fileEdk" column="cm_file_edk" jdbcType="VARCHAR"/>
+                    <result property="fileSize" column="cm_file_size" jdbcType="DOUBLE"/>
+                    <result property="fileName" column="cm_file_name" jdbcType="VARCHAR"/>
+                    <result property="fileDk" column="cm_file_dk" jdbcType="VARCHAR"/>
+                    <result property="createTime" column="cm_create_time" jdbcType="TIMESTAMP"/>
+                    <result property="updateTime" column="cm_update_time" jdbcType="TIMESTAMP"/>
+                    <result property="isDel" column="cm_is_del" jdbcType="BOOLEAN"/>
+                    <result property="durationNum" column="cm_duration_num" jdbcType="INTEGER"/>
+                    <result property="fileId" column="cm_file_id" jdbcType="VARCHAR"/>
+                </association>
+            </collection>
+      
+        </collection>
+
+
+
+    </resultMap>
+
+
+    <sql id="courseInfo">
+        select c.id c_id, c.course_name c_course_name, c.brief c_brief, c.price c_price , c.price_tag c_price_tag,c.discounts c_discounts , c.discounts_tag c_discounts_tag, c.course_description_mark_down c_course_description_mark_down,
+        c.course_description c_course_description, c.course_img_url c_course_img_url, c.is_new c_is_new, c.is_new_des c_is_new_des, c.last_operator_id c_last_operator_id,c.auto_online_time c_auto_online_time, c.create_time c_create_time, c.update_time c_update_time, c.is_del c_is_del, c.total_duration c_total_duration,
+        c.status c_status, c.sort_num c_sort_num, c.preview_first_field c_preview_first_field, c.preview_second_field c_preview_second_field, c.sales c_sales,c.type_id c_type_id, c.orientation_id c_orientation_id, c.teacher_id c_teacher_id,
+        ca.id ca_id, ca.course_id ca_course_id ,ca.begin_time ca_begin_time , ca.end_time ca_end_time, ca.amount ca_amount, ca.stock ca_stock, ca.status ca_status, ca.is_del ca_is_del, ca.remark ca_remark, ca.create_time ca_create_time, ca.update_time ca_update_time,
+        ct.id ct_id,type_name ct_type_name,t.id t_id, t.teacher_name t_teacher_name, t.position t_position, t.description t_description,  t.create_time t_create_time, t.update_time t_update_time, t.is_del t_is_del,
+        co.id co_id,co.orientation_name co_orientation_name,co.parent_id co_parent_id,co1.id co1_id,co1.orientation_name co1_orientation_name,co1.parent_id co1_parent_id,
+        cs.id cs_id, cs.course_id cs_course_id, cs.section_name cs_section_name, cs.description cs_description, cs.create_time cs_create_time, cs.update_time cs_update_time, cs.is_del cs_is_del, cs.order_num cs_order_num, cs.status cs_status,
+        cl.id cl_id,cl.course_id cl_course_id,cl.section_id cl_section_id,cl.theme cl_theme,cl.duration cl_duration,cl.is_free cl_is_free,cl.create_time cl_create_time,cl.update_time cl_update_time,cl.is_del cl_is_del,cl.order_num cl_order_num,cl.status cl_status,
+        cm.id cm_id,cm.course_id cm_course_id,cm.section_id cm_section_id,cm.lesson_id cm_lesson_id,cm.cover_image_url cm_cover_image_url,cm.duration cm_duration,cm.file_edk cm_file_edk,
+        cm.file_size cm_file_size,cm.file_name cm_file_name,cm.file_dk cm_file_dk,cm.create_time cm_create_time,cm.update_time cm_update_time,cm.is_del cm_is_del,cm.duration_num cm_duration_num,cm.file_id cm_file_id
+        from course c left join course_activity ca
+        on c.id = ca.course_id left join course_type ct
+        on c.type_id = ct.id left join teacher t
+        on c.teacher_id = t.id left join course_orientation co
+        on c.orientation_id = co.id left join course_orientation co1
+        on co.parent_id = co1.id left join course_section cs
+        on cs.course_id = c.id left join course_lesson cl
+        on cs.id = cl.section_id left join course_media cm
+        on cl.id = cm.lesson_id
+    </sql>
+    
+    <select id="getAllCourse" resultMap="getCourse">
+        <include refid="courseInfo"/>
+            order by c_id
+    </select>
+
+
+</mapper>

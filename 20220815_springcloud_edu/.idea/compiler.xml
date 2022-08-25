@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="edu_user_service" />
+        <module name="edu_ad_service" />
+        <module name="edu_comment_api" />
+        <module name="edu_course_service" />
+        <module name="edu_search_service" />
+        <module name="edu_gateway_service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="20220815_springcloud_edu" target="1.8" />
+      <module name="comment_api" target="1.8" />
+      <module name="edu_ad_service" target="1.8" />
+      <module name="edu_comment_api" target="1.8" />
+      <module name="edu_course_service" target="1.8" />
+      <module name="edu_gateway_service" target="1.8" />
+      <module name="edu_search_service" target="1.8" />
+      <module name="edu_user_service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="20220815_springcloud_edu" options="-parameters" />
+      <module name="comment_api" options="-parameters" />
+      <module name="edu_ad_service" options="-parameters" />
+      <module name="edu_comment_api" options="-parameters" />
+      <module name="edu_course_service" options="-parameters" />
+      <module name="edu_gateway_service" options="-parameters" />
+      <module name="edu_search_service" options="-parameters" />
+      <module name="edu_user_service" options="-parameters" />
+    </option>
+  </component>
+</project>
