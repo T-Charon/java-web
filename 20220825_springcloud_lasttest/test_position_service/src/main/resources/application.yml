@@ -1,0 +1,25 @@
+server:
+  port: 9101
+
+spring:
+  application:
+    name: test-position-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.75.245:8848
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test_position?serverTimezone=UTC&useUnicode=true
+    username: root
+    password: root
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  type-aliases-package: com.charon.test_position_service.entity
+  mapper-locations: classpath:mapper/*.xml
+
+
