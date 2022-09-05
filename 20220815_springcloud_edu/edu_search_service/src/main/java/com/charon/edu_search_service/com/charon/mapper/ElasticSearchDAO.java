@@ -10,6 +10,7 @@ import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
@@ -18,7 +19,10 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
@@ -186,5 +190,20 @@ public class ElasticSearchDAO {
         return new PageEntity<>(from,response.getHits().getTotalHits().value,size,data);
     }
 
+    //添加或更新数据
+    public void savaOrUpdate(String indexName,ElasticEntity entity) throws IOException {
+        IndexRequest request = new IndexRequest(indexName);
+        request.id(entity.getId()).source(JSON.toJSONString(entity.getData()),XContentType.JSON);
+        IndexResponse respose = client.index(request, RequestOptions.DEFAULT);
+        log.info("{}添加或更新数据成功",indexName, JSON.toJSONString(respose));
 
+    }
+
+    //通过条件删除对象
+    public void deleteByQuery(String indexName, QueryBuilder builder) throws IOException {
+        DeleteByQueryRequest request = new DeleteByQueryRequest(indexName);
+        request.setQuery(builder);
+        BulkByScrollResponse respose = client.deleteByQuery(request, RequestOptions.DEFAULT);
+        log.info("{}删除数据成功",indexName, JSON.toJSONString(respose));
+    }
 }

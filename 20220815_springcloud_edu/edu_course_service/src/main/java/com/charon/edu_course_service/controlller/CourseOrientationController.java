@@ -18,12 +18,21 @@ public class CourseOrientationController {
     @Autowired
     private CourseOrientationService courseOrientationService;
 
+    /**
+     * 获取一级列表方法
+     * @return
+     */
     @GetMapping
     public ResponseEntity<List<CourseOrientation>> getListCourseOrientation(){
 
         return ResponseEntity.ok(courseOrientationService.getListCourseOrientation());
     }
 
+    /**
+     * 根据上级id获取下级课程方向
+     * @param id
+     * @return
+     */
     @GetMapping("/parent/{id}")
     public ResponseEntity<List<CourseOrientation>> getListCourseOrientationChildren(@PathVariable Integer id){
         return ResponseEntity.ok(courseOrientationService.getListCourseOrientationChildren(id));

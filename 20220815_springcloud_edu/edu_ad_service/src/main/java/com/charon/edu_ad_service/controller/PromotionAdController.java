@@ -2,16 +2,14 @@ package com.charon.edu_ad_service.controller;
 
 import com.charon.comment.entity.PromotionAd;
 import com.charon.edu_ad_service.service.PromotionAdService;
-import com.github.tobato.fastdfs.domain.StorePath;
-import com.github.tobato.fastdfs.service.FastFileStorageClient;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -23,9 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/ad")
 public class PromotionAdController {
-    public static final String DIR = "http://192.168.75.245/";
-    @Autowired
-    private FastFileStorageClient client;
+
+
 
 
     @Autowired
@@ -38,13 +35,5 @@ public class PromotionAdController {
     }
 
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public ResponseEntity<String> upload(MultipartFile file) throws IOException {
-        //获得后缀名
-        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        //上传
-        StorePath storePath = client.uploadFile(file.getInputStream(), file.getSize(), extension, null);
-        System.out.println("save:" + storePath.getFullPath());
-        return ResponseEntity.ok(DIR + storePath.getFullPath());
-    }
+
 }

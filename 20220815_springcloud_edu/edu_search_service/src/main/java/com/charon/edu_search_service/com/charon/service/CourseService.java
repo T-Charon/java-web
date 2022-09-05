@@ -25,4 +25,16 @@ public interface CourseService {
      * @return
      */
     PageEntity<Course>searchCoursePage(Map<String,String>map);
+
+    /**
+     * 添加或更新课程
+     * @param course
+     */
+    void savaOrUpdate(Course course);
+
+    /**
+     * 按id删除课程
+     * @param id
+     */
+    void removeById(String id);
 }

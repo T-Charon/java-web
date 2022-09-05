@@ -1,0 +1,24 @@
+server:
+  port: 6999
+spring:
+  application:
+    name: canal-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.75.245:8848
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: lzy
+    password: lzy
+    virtual-host: myhost
+
+
+canal:
+  client:
+    instances:
+      example:
+        host: 192.168.75.245
+        port: 11111
+        batchSize: 1000

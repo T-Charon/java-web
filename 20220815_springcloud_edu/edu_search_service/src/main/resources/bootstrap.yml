@@ -13,7 +13,15 @@ spring:
         server-addr: 192.168.75.245:8848 # 配置中心地址
         file-extension: yaml            # 配置文件的后缀
         prefix: search-service       # 配置文件的前缀
+
   profiles:
     active: dev
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: lzy
+    password: lzy
+    virtual-host: myhost
 
 

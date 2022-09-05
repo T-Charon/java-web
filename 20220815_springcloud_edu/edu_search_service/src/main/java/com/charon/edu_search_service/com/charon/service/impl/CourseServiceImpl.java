@@ -8,6 +8,7 @@ import com.charon.edu_search_service.com.charon.feign.CourseFeign;
 import com.charon.edu_search_service.com.charon.mapper.ElasticSearchDAO;
 import com.charon.edu_search_service.com.charon.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,5 +80,33 @@ public class CourseServiceImpl implements CourseService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 添加或更新课程
+     * @param course
+     */
+    @Override
+    public void savaOrUpdate(Course course) {
+        try {
+            dao.savaOrUpdate(INDEX_NAME,new ElasticEntity(String.valueOf(course.getId()),course));
+        } catch (IOException e) {
+            log.error("出现异常",e);
+            throw  new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 按id删除课程
+     * @param id
+     */
+    @Override
+    public void removeById(String id) {
+        try {
+            dao.deleteByQuery(INDEX_NAME, QueryBuilders.termQuery("id",id));
+        } catch (IOException e) {
+            log.error("出现异常",e);
+            throw  new RuntimeException(e);
+        }
     }
 }

@@ -14,8 +14,16 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
+
     </properties>
     <dependencies>
+        <!--seata-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -33,7 +41,13 @@
             <artifactId>edu_comment_api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+
+
     </dependencies>
+
+
+
 
     <build>
         <plugins>

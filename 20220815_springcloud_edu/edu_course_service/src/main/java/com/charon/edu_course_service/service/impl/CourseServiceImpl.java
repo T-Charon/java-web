@@ -16,12 +16,22 @@ import java.util.List;
 @Service
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course>
     implements CourseService{
-    @Autowired
+    @Autowired(required = false)
     private CourseMapper courseMapper;
 
     @Override
     public List<Course> getAllCourse() {
         return courseMapper.getAllCourse();
+    }
+
+    @Override
+    public Course getCourseInfoById(Long id) {
+        return courseMapper.getCourseInfoById(id);
+    }
+
+    @Override
+    public Boolean updateCourse(Long id, Integer sales) {
+        return courseMapper.updateCourse(id,sales);
     }
 }
 

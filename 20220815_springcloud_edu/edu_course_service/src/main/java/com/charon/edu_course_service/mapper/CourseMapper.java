@@ -16,6 +16,21 @@ public interface CourseMapper extends BaseMapper<Course> {
      */
     List<Course> getAllCourse();
 
+    /**
+     * 根据id获取课程信息
+     * @param id
+     * @return
+     */
+    Course getCourseInfoById(Long id);
+
+    /**
+     * 更新销量
+     * @param id
+     * @param sales
+     * @return
+     */
+    Boolean updateCourse(Long id ,Integer sales);
+
 }
 
 

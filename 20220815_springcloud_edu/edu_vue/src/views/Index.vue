@@ -298,8 +298,8 @@
                 });
 
             },
-            gotoDetail(courseName){
-
+            gotoDetail(item){
+                this.$router.push({ name: "Course", params: { course: item } });
             },
         },
         created() {

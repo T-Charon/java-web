@@ -24,4 +24,8 @@
         status,is_del,remark,
         create_time,update_time
     </sql>
+    <update id="changeStock" >
+        update edu_course.course_activity set stock = stock + #{num}
+        where id = #{activityId}
+    </update>
 </mapper>

@@ -12,6 +12,10 @@ import java.util.List;
  **/
 @FeignClient("course-service")
 public interface CourseFeign {
+    /**
+     * 获取所有课程信息
+     * @return
+     */
     @GetMapping("/course/getAllCourse")
     List<Course> getAllCourse();
 }

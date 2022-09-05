@@ -57,7 +57,7 @@
           <i class="el-icon-bell"></i>
         </div>
         <img :src="user.icon" class="avatar-wrap" />
-        <div class="bar-wrap">
+        <div class="bar-wrap" >
           <ul class="account-bar" >
             <li class="user_dropdown" data-lg-tj-track-code="index_user" >
               <span class="unick">{{ user.realname }}</span>
@@ -175,18 +175,22 @@ export default {
       this.axios
       .post("/login" ,this.qs.stringify({username:this.username,password:this.password}))
       .then( (result)=>{
-        console.log( result );
-        if(result.data.user){
-          console.log("登录成功" + result.data);
+        console.log(result.data.data)
+        if(result.data.data.user){
+
+          console.log("登录成功" + result);
           this.dialogFormVisible = false ; //关闭登录框
-          this.user = result.data.user; // 保存返回数据中的用户对象信息
+          this.$message.success("登录成功！");
+
+          this.user = result.data.data.user; // 保存返回数据中的用户对象信息
+          console.log(this.user);
           this.isLogin = true; // 更新登录状态
           localStorage.setItem("user", JSON.stringify(this.user)); // 将登录成功的对象信息保存到本地储存中
-          localStorage.setItem("token", result.data.token); //保存token
+          localStorage.setItem("token", result.data.data.token); //保存token
         }else{
-          this.$message.error("登录失败！");
+          this.$message.error("登录失败："+result.data.data);
         }
-        this.$router.go(0);//刷新页面
+        //this.$router.go(0);//刷新页面
       } )
       .catch( (error)=>{
         this.$message.error("登录失败！");
@@ -223,9 +227,9 @@ export default {
     //登出
     logout(){ 
       localStorage.setItem("user", null); // 将登录成功的对象信息保存到本地储存中
+      localStorage.setItem("token", null);
       this.isLogin = false; // 更新登录状态
-      alert('谢谢使用，再见！');
-
+      this.$message.success("谢谢使用，再见！");
       // 去检测微信是否登录过
       this.axios
       .get("/logout")

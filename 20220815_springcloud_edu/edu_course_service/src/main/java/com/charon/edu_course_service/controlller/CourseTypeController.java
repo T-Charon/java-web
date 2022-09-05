@@ -22,6 +22,10 @@ public class CourseTypeController {
     @Autowired
     private CourseTypeService courseTypeService;
 
+    /**
+     * 获取所有课程类型
+     * @return
+     */
     @GetMapping
     public ResponseEntity<List<CourseType>> getListCourseType(){
 

@@ -145,10 +145,18 @@
         on cs.id = cl.section_id left join course_media cm
         on cl.id = cm.lesson_id
     </sql>
-    
+    <update id="updateCourse">
+        update edu_course.course set sales = sales + #{sales}
+        where id = #{id}
+    </update>
+
     <select id="getAllCourse" resultMap="getCourse">
         <include refid="courseInfo"/>
             order by c_id
+    </select>
+    <select id="getCourseInfoById" resultMap="getCourse">
+        <include refid="courseInfo"/>
+        where  c.id = #{id}
     </select>
 
 

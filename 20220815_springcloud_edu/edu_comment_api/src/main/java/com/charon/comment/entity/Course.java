@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -14,7 +16,10 @@ import java.util.List;
  * 课程
  * @TableName course
  */
+
 @TableName(value ="course")
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class Course implements Serializable {
 
@@ -50,7 +55,7 @@ public class Course implements Serializable {
      * id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 课程名称

@@ -3,9 +3,8 @@ package com.charon.edu_course_service.controlller;
 import com.charon.comment.entity.Course;
 import com.charon.edu_course_service.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +28,25 @@ public class CourseController {
         return courseService.getAllCourse();
     }
 
+    /**
+     * 根据id获取课程信息（canal监控数据库是否被修改）
+     * @param id
+     * @return
+     */
+    @GetMapping("/getCourseInfoById/{id}")
+    Course getCourseInfoById(@PathVariable Long id){
+        return courseService.getCourseInfoById(id);
+    }
 
+
+    /**
+     * 支付成功后修改销量
+     * @param id
+     * @param sales
+     * @return
+     */
+    @PutMapping("sales")
+    public ResponseEntity<Boolean> updateSales(Long id , Integer sales){
+        return ResponseEntity.ok(courseService.updateCourse(id,sales));
+    }
 }
